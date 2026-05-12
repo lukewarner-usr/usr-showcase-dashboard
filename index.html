@@ -1,0 +1,4722 @@
+<meta charset="utf-8">
+<title>USR Showcase Landing Pages — Multi-Event Report</title>
+<style>
+:root { color-scheme: light; --carmine:#EC3642; --carmine-soft:#FBE3E5; --black:#0A0A0A; --ink-2:#444; --ink-3:#777; --bg:#FFFFFF; --surface:#FAFAFA; --line:#EAEAEA; --green:#0A8C3E; --green-soft:#E8F5EC; --amber:#B45309; --amber-soft:#FEF3DB; }
+html,body { margin:0; padding:0; background:var(--bg); color:var(--black); font-family:'Lato', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:14px; line-height:1.55; }
+.wrap { max-width:1180px; margin:0 auto; padding:28px 28px 80px; }
+header.top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:24px; }
+.brand { display:flex; align-items:center; gap:14px; }
+.brand .mark { width:54px; height:auto; }
+.brand h1 { font-size:20px; margin:0 0 2px; font-weight:500; letter-spacing:-0.01em; }
+.brand .sub { font-size:12px; color:var(--ink-3); }
+.snap { text-align:right; font-size:11px; color:var(--ink-3); line-height:1.5; }
+.snap b { color:var(--black); font-weight:500; }
+.snap .refresh { display:inline-block; margin-top:6px; padding:4px 10px; border:1px solid var(--line); border-radius:6px; color:var(--ink-2); font-size:11px; }
+h2 { font-size:16px; margin:32px 0 10px; font-weight:500; letter-spacing:-0.005em; }
+h2 .hint { font-size:12px; color:var(--ink-3); font-weight:400; margin-left:8px; }
+h2:first-of-type { margin-top:0; }
+p.lede { color:var(--ink-2); font-size:13px; margin:4px 0 14px; }
+.caveat { background:var(--amber-soft); border-left:3px solid var(--amber); padding:12px 14px; border-radius:0 8px 8px 0; margin-bottom:24px; font-size:13px; color:#5a3a0a; }
+.caveat b { color:var(--amber); }
+.insight { background:var(--carmine-soft); border-left:3px solid var(--carmine); padding:16px 18px; border-radius:0 10px 10px 0; margin:8px 0 24px; }
+.insight h3 { margin:0 0 6px; color:var(--carmine); font-size:14px; font-weight:500; letter-spacing:0.02em; text-transform:uppercase; }
+.insight p { margin:0; font-size:14px; color:var(--black); line-height:1.6; }
+.insight p strong { color:var(--carmine); font-weight:500; }
+.stats { display:grid; grid-template-columns:repeat(6, 1fr); gap:12px; margin:8px 0 16px; }
+.stat { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 14px 12px; }
+.stat .lbl { font-size:11px; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+.stat .val { font-size:24px; font-weight:500; color:var(--black); line-height:1.1; }
+.stat .delta { font-size:11px; color:var(--ink-3); margin-top:4px; }
+.stat.accent .val { color:var(--carmine); }
+.stat.green .val { color:var(--green); }
+.funnel { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin:12px 0 8px; }
+.funnel .step { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px; }
+.funnel .step .lbl { font-size:11px; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; }
+.funnel .step .v { font-size:28px; font-weight:500; line-height:1.1; margin:6px 0 4px; }
+.funnel .step .pct { font-size:12px; color:var(--ink-2); }
+.funnel .step.last .v { color:var(--green); }
+.funnel .step .pct b { color:var(--carmine); font-weight:500; }
+.card { background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:16px; }
+.card h3 { margin:0 0 10px; font-size:14px; font-weight:500; }
+.chart-wrap { position:relative; height:280px; }
+.chart-wrap.tall { height:340px; }
+table.data { width:100%; border-collapse:collapse; font-size:13px; }
+table.data th { text-align:left; font-weight:500; color:var(--ink-3); padding:8px 10px; border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap; }
+table.data td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.data tr:last-child td { border-bottom:none; }
+table.data td.num { text-align:right; font-variant-numeric:tabular-nums; }
+table.data td.mono { font-family:'SFMono-Regular', Menlo, Consolas, monospace; font-size:12px; color:var(--ink-2); }
+table.data tr:hover { background:var(--surface); }
+table.data tfoot td { background:var(--surface); font-weight:500; border-top:2px solid var(--line); }
+.pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:500; letter-spacing:0.02em; }
+.pill.direct { background:#E8F5EC; color:var(--green); }
+.pill.fb { background:#E7F0FB; color:#1B4F8F; }
+.pill.ig { background:#F8E5F0; color:#A6306C; }
+.pill.th { background:#EFEFEF; color:#444; }
+.pill.none { background:#F2F2F2; color:#666; }
+.pill.broken { background:#FDE4E5; color:var(--carmine); }
+.pill.medium-paid { background:#FFF1D6; color:var(--amber); }
+.pill.medium-organic { background:#E8F5EC; color:var(--green); }
+.pill.medium-none { background:#EFEFEF; color:#666; }
+.pill.bridge-cta { background:#E7F0FB; color:#1B4F8F; }
+.pill.bridge-rs { background:#E8F5EC; color:var(--green); }
+footer.method { margin-top:36px; padding:16px 18px; background:var(--surface); border-radius:10px; font-size:12px; color:var(--ink-2); line-height:1.7; }
+footer.method b { color:var(--black); font-weight:500; }
+footer.method code { background:#fff; border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:11px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+@media (max-width:980px) { .stats { grid-template-columns:repeat(3, 1fr); } .funnel { grid-template-columns:repeat(2, 1fr); } .row2 { grid-template-columns:1fr; } }
+
+/* Overview table */
+table.overview td.event-cell { padding:11px 10px; }
+table.overview .event-name { font-weight:500; }
+table.overview .event-former { font-size:11px; color:var(--ink-3); margin-top:2px; }
+table.overview tr.totals td { background:#FFF6F6; border-top:2px solid var(--carmine); color:var(--carmine); font-weight:500; }
+table.overview .conv-bar { display:inline-block; width:60px; height:6px; background:#F0F0F0; border-radius:3px; overflow:hidden; vertical-align:middle; margin-left:6px; }
+table.overview .conv-bar .fill { display:block; height:100%; background:var(--carmine); }
+
+/* Event tabs */
+.event-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 20px; border-bottom:1px solid var(--line); padding-bottom:0; }
+.event-tab { background:transparent; border:none; padding:10px 14px; font-size:13px; font-family:inherit; color:var(--ink-2); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:0; }
+.event-tab:hover { color:var(--black); background:var(--surface); border-radius:6px 6px 0 0; }
+.event-tab .tab-path { font-family:'SFMono-Regular', Menlo, Consolas, monospace; font-size:10px; color:var(--ink-3); }
+.event-tab .tab-title { font-weight:500; }
+.event-tab.active { color:var(--carmine); border-bottom-color:var(--carmine); }
+.event-tab.active .tab-path { color:var(--carmine); opacity:0.7; }
+.event-tab .tab-regs { display:inline-block; margin-left:6px; padding:1px 6px; border-radius:999px; background:var(--line); color:var(--ink-2); font-size:10px; font-weight:500; }
+.event-tab.active .tab-regs { background:var(--carmine-soft); color:var(--carmine); }
+
+/* Subheader inside event panel */
+.event-subhead { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:18px; display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.event-subhead h3 { margin:0; font-size:15px; font-weight:500; }
+.event-subhead .meta { font-size:12px; color:var(--ink-3); }
+.event-subhead .former-name { font-size:11px; color:var(--amber); margin-top:2px; }
+.empty-note { padding:20px; text-align:center; color:var(--ink-3); font-size:13px; background:var(--surface); border:1px dashed var(--line); border-radius:10px; }
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 124 70" xmlns="http://www.w3.org/2000/svg" aria-label="USR" role="img">
+      <g><path d="M16.24 69.152C11.568 69.152 7.792 67.808 4.912 65.12C2.032 62.432 0.592 58.912 0.592 54.56V0.799995H12.688V54.56C12.688 55.648 13.008 56.512 13.648 57.152C14.288 57.792 15.152 58.112 16.24 58.112C17.328 58.112 18.192 57.792 18.832 57.152C19.536 56.512 19.888 55.648 19.888 54.56V0.799995H31.984V54.56C31.984 58.912 30.544 62.432 27.664 65.12C24.784 67.808 20.976 69.152 16.24 69.152ZM51.9385 69.152C47.2665 69.152 43.4905 67.808 40.6105 65.12C37.7305 62.432 36.2905 58.912 36.2905 54.56V44.576H48.3865V54.56C48.3865 55.648 48.7065 56.512 49.3465 57.152C49.9865 57.792 50.8505 58.112 51.9385 58.112C53.0265 58.112 53.8905 57.792 54.5305 57.152C55.2345 56.512 55.5865 55.648 55.5865 54.56V46.784C55.5865 45.376 54.9145 44.032 53.5705 42.752C52.2905 41.472 50.7225 40.256 48.8665 39.104C47.0105 37.952 45.1225 36.704 43.2025 35.36C41.3465 33.952 39.7465 32.128 38.4025 29.888C37.1225 27.648 36.4825 25.088 36.4825 22.208V14.144C36.4825 9.792 37.8905 6.304 40.7065 3.68C43.5225 0.991999 47.2665 -0.352001 51.9385 -0.352001C56.6105 -0.352001 60.3545 0.991999 63.1705 3.68C66.0505 6.304 67.4905 9.792 67.4905 14.144V23.072H55.3945V14.048C55.3945 13.024 55.0745 12.224 54.4345 11.648C53.7945 11.008 52.9625 10.688 51.9385 10.688C50.9145 10.688 50.0825 11.008 49.4425 11.648C48.8665 12.224 48.5785 13.024 48.5785 14.048V20.768C48.5785 22.24 49.2185 23.616 50.4985 24.896C51.8425 26.176 53.4425 27.392 55.2985 28.544C57.2185 29.696 59.1065 30.944 60.9625 32.288C62.8185 33.632 64.3865 35.424 65.6665 37.664C67.0105 39.904 67.6825 42.464 67.6825 45.344V54.56C67.6825 58.912 66.2425 62.432 63.3625 65.12C60.4825 67.808 56.6745 69.152 51.9385 69.152ZM92.6695 68L87.6775 42.368H84.3175V68H72.2215V0.799995H89.0215C93.3735 0.799995 96.8935 2.048 99.5815 4.544C102.27 6.976 103.614 10.24 103.614 14.336V29.216C103.614 33.696 101.982 37.152 98.7175 39.584L104.862 68H92.6695ZM91.5175 15.392C91.5175 14.304 91.1655 13.44 90.4615 12.8C89.8215 12.16 88.9575 11.84 87.8695 11.84H84.3175V29.408L78.9415 31.616V32H87.8695C88.9575 32 89.8215 31.68 90.4615 31.04C91.1655 30.4 91.5175 29.536 91.5175 28.448V15.392Z" fill="#EC3642"/></g>
+    </svg>
+    <div>
+      <h1>USR Showcase Landing Pages — Multi-Event Report</h1>
+      <div class="sub">7 Showcases · <code>app.universalspeedrating.com/events/{id}</code></div>
+    </div>
+  </div>
+  <div class="snap" id="snap"></div>
+</header>
+
+<div class="caveat">
+  <b>Two notes worth knowing.</b><br>
+  <b>(1) Every Showcase was renamed mid-stream.</b> All 7 events were originally titled with their partner Speed Lab's name (e.g., Transcend, Veritas, Hansen) and rebranded to "USR Showcase: [State]" between April 28 and May 7, 2026. Scope is <code>event_id</code> throughout — registrations and CTA clicks from both name eras are included for each event.<br>
+  <b>(2) Attribution method.</b> The web pixel doesn't capture <code>user_id</code> on page views (every visitor is anonymous), and server-side <code>registration_completed</code> doesn't carry UTMs. Mid-funnel events attribute cleanly via <code>anonymous_id</code>. Paid registrations use a temporal-proximity bridge — find the closest CTA/Reg-Start event by anonymous_id within ±15 min, then trace its page-view UTMs. Worth a ticket to engineering to plumb <code>user_id</code> through page-view tracking.
+</div>
+
+<h2>All Showcases — overview</h2>
+<p class="lede">Side-by-side comparison of all 7 landing pages, current event_id mapping, totals, and end-to-end conversion rate. Click an event below for the full detail view.</p>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data overview" id="overview-table">
+  <thead><tr>
+    <th>Event</th><th>Path</th><th class="num">Page views</th><th class="num">Unique</th><th class="num">CTA clicks</th><th class="num">Reg started</th><th class="num">Paid regs</th><th class="num">Revenue</th><th>End-to-end conv.</th>
+  </tr></thead>
+  <tbody></tbody>
+  <tfoot><tr class="totals" id="overview-totals"></tr></tfoot>
+</table></div>
+
+<div class="row2" style="margin-top:16px">
+  <div class="card">
+    <h3>Page views per Showcase</h3>
+    <div class="chart-wrap"><canvas id="overview-pv"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>Revenue per Showcase</h3>
+    <div class="chart-wrap"><canvas id="overview-rev"></canvas></div>
+  </div>
+</div>
+
+<h2 id="detail-header">Individual Showcase detail</h2>
+<p class="lede">Pick a Showcase to dig into.</p>
+<nav class="event-tabs" id="event-tabs"></nav>
+
+<div class="event-subhead" id="event-subhead"></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Top of funnel</h3>
+<div class="stats" id="stats"></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Funnel</h3>
+<div class="funnel" id="funnel"></div>
+
+<div class="insight"><h3>The signal for this Showcase</h3><p id="insight-text"></p></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Daily timeline</h3>
+<div class="card"><div class="chart-wrap tall"><canvas id="daily"></canvas></div></div>
+
+<div class="row2">
+  <div class="card"><h3>Page views by UTM source</h3><div class="chart-wrap"><canvas id="source-bars"></canvas></div></div>
+  <div class="card"><h3>Funnel by first-touch source <span style="font-size:11px;color:var(--ink-3);font-weight:400">(mid-funnel)</span></h3><div class="chart-wrap"><canvas id="funnel-bars"></canvas></div></div>
+</div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">UTM breakdown <span style="font-size:12px;color:var(--ink-3);font-weight:400;margin-left:8px">raw values with a normalized read</span></h3>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data" id="utm-table">
+  <thead><tr><th>Source</th><th>Medium</th><th>Campaign (raw)</th><th>Campaign (cleaned)</th><th class="num">Page views</th><th class="num">Unique visitors</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Referrer hosts</h3>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data" id="ref-table">
+  <thead><tr><th>Referrer host</th><th class="num">Page views</th><th class="num">Unique visitors</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Mid-funnel attribution <span style="font-size:12px;color:var(--ink-3);font-weight:400;margin-left:8px">anonymous IDs that clicked CTA or started reg</span></h3>
+<div class="card" style="padding:0;overflow:hidden;max-height:320px;overflow-y:auto"><table class="data" id="anon-table">
+  <thead><tr><th>Anonymous ID</th><th>First visit</th><th>First-touch source</th><th>Last-touch source</th><th>Referrer</th><th class="num">CTA clicks</th><th class="num">Reg started</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Paid registrations by source <span style="font-size:12px;color:var(--ink-3);font-weight:400;margin-left:8px">first-touch and last-touch rollup</span></h3>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data" id="reg-by-source-table">
+  <thead><tr><th>Source</th><th class="num">First-touch regs</th><th class="num">Last-touch regs</th><th>First-touch share</th><th>Last-touch share</th></tr></thead>
+  <tbody></tbody>
+  <tfoot><tr><td>Total paid registrations</td><td class="num" id="reg-total-ft"></td><td class="num" id="reg-total-lt"></td><td></td><td></td></tr></tfoot>
+</table></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Paid registrations — row-level detail</h3>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data" id="paid-table">
+  <thead><tr><th>Reg ID</th><th>User</th><th>Reg name at time</th><th>Paid at</th><th class="num">Amount</th><th class="num">Discount</th><th>Bridge event</th><th class="num">Gap</th><th>First-touch</th><th>Last-touch</th><th class="num">Visits</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Unattributed paid registrations</h3>
+<div class="card" style="padding:0;overflow:hidden;"><table class="data" id="unattributed-table">
+  <thead><tr><th>Reg ID</th><th>User</th><th>Paid at</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<footer class="method">
+  <b>Methodology.</b> Page views come from <code>website_prod.pages</code> filtered to <code>path LIKE '/events/{id}%'</code>. CTA Click, Reg Started, Reg Completed, and Payment Submitted are filtered by <code>event_id={id}</code> (cast to varchar) in their respective tables — this covers both original partner-named eras and the renamed "USR Showcase: [State]" eras. Mid-funnel attribution joins <code>pages.anonymous_id</code> to the union of CTA + Reg-Started anonymous_ids — reliable. Paid-reg attribution bridges <code>registration_completed.user_id</code> → nearest <code>anonymous_id</code> on CTA/Reg-Started within ±15 min, then back to <code>pages</code> — inferred. Revenue is shown in dollars (Stripe amounts are stored in cents).
+  <br><br>
+  To refresh this dashboard, ask Claude: "refresh the Showcase landing pages dashboard."
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script>
+const DATA = {
+  "generated_at": "2026-05-12T14:33:43.646Z",
+  "event_ids": [
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "13",
+    "14"
+  ],
+  "events": {
+    "7": {
+      "event_id": "7",
+      "page_path": "/events/7",
+      "current_name": "USR Showcase: New Mexico",
+      "former_names": [
+        "Transcend Showcase"
+      ],
+      "summary": {
+        "pv": "1267",
+        "uv": "1148",
+        "first_seen": "2026-04-23T14:57:52.044Z",
+        "last_seen": "2026-05-12T05:25:39.967Z",
+        "cta_clicks": "33",
+        "cta_unique": "26",
+        "rs_count": "52",
+        "rs_unique": "31",
+        "rc_count": "9",
+        "rc_unique": "9",
+        "rc_revenue_cents": "78500",
+        "rc_subtotal_cents": "85500",
+        "rc_discount_cents": "7000",
+        "ps_count": "9",
+        "ps_unique": "9",
+        "ps_amount_cents": "78500"
+      },
+      "daily": [
+        {
+          "d": "2026-04-23T00:00:00.000Z",
+          "pv": "3",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-24T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-27T00:00:00.000Z",
+          "pv": "19",
+          "uv": "15",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-28T00:00:00.000Z",
+          "pv": "14",
+          "uv": "13",
+          "cta": "3",
+          "rs": "3",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-04-29T00:00:00.000Z",
+          "pv": "3",
+          "uv": "3",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-30T00:00:00.000Z",
+          "pv": "5",
+          "uv": "3",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-01T00:00:00.000Z",
+          "pv": "115",
+          "uv": "114",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-02T00:00:00.000Z",
+          "pv": "125",
+          "uv": "121",
+          "cta": "2",
+          "rs": "4",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-03T00:00:00.000Z",
+          "pv": "116",
+          "uv": "115",
+          "cta": "0",
+          "rs": "3",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-04T00:00:00.000Z",
+          "pv": "96",
+          "uv": "90",
+          "cta": "5",
+          "rs": "10",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-05T00:00:00.000Z",
+          "pv": "119",
+          "uv": "113",
+          "cta": "0",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-06T00:00:00.000Z",
+          "pv": "85",
+          "uv": "73",
+          "cta": "3",
+          "rs": "5",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-07T00:00:00.000Z",
+          "pv": "135",
+          "uv": "113",
+          "cta": "6",
+          "rs": "7",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "89",
+          "uv": "82",
+          "cta": "4",
+          "rs": "5",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "112",
+          "uv": "110",
+          "cta": "3",
+          "rs": "5",
+          "rc": "2",
+          "ps": "2"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "87",
+          "uv": "85",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "111",
+          "uv": "107",
+          "cta": "3",
+          "rs": "3",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "32",
+          "uv": "25",
+          "cta": "2",
+          "rs": "3",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June6 | Traffic",
+          "utm_content": "USR | ABQ | june6 | Ad4 | RecruitingExposure",
+          "utm_term": "120245136226990564",
+          "utm_id": "120245133532220564",
+          "pv": "291",
+          "uv": "286"
+        },
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "283",
+          "uv": "183"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136349230564",
+          "utm_term": "120245136170440564",
+          "utm_id": "120245133532220564",
+          "pv": "237",
+          "uv": "236"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June6 | Traffic",
+          "utm_content": "USR | ABQ | june6 | Ad6 | WhereTheyRank",
+          "utm_term": "120245133532230564",
+          "utm_id": "120245133532220564",
+          "pv": "235",
+          "uv": "232"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136400100564",
+          "utm_term": "120245133532230564",
+          "utm_id": "120245133532220564",
+          "pv": "50",
+          "uv": "50"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June6 | Traffic",
+          "utm_content": "USR | ABQ | june6 | Ad1 | WhatItTakes",
+          "utm_term": "120245136170440564",
+          "utm_id": "120245133532220564",
+          "pv": "49",
+          "uv": "49"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136393410564",
+          "utm_term": "120245136226990564",
+          "utm_id": "120245133532220564",
+          "pv": "46",
+          "uv": "46"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136349230564",
+          "utm_term": "120245136170440564",
+          "utm_id": "120245133532220564",
+          "pv": "18",
+          "uv": "16"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "social",
+          "utm_campaign": "(none)",
+          "utm_content": "link_in_bio",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "12",
+          "uv": "9"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "8",
+          "uv": "8"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136400100564",
+          "utm_term": "120245133532230564",
+          "utm_id": "120245133532220564",
+          "pv": "8",
+          "uv": "8"
+        },
+        {
+          "utm_source": "facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June 6 | Retarget",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "(none)",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "(none)",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad1+%7C+WhatItTakes",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "(none)",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "utm_content": "USR+%7C+ABQ+%7C+june6+%7C+Ad1+%7C+WhatItTakes",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136393410564",
+          "utm_term": "120245136226990564",
+          "utm_id": "120245133532220564",
+          "pv": "1",
+          "uv": "1"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "utm_content": "120245136349230564",
+          "utm_term": "120245136170440564",
+          "utm_id": "120245133532220564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June6 | Traffic",
+          "pv": "575",
+          "uv": "566"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "pv": "333",
+          "uv": "332"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "283",
+          "uv": "183"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "pv": "27",
+          "uv": "25"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "pv": "16",
+          "uv": "16"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "social",
+          "utm_campaign": "(none)",
+          "pv": "12",
+          "uv": "9"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "(none)",
+          "utm_campaign": "USR+%7C+ABQ+%7C+June6+%7C+Traffic",
+          "pv": "12",
+          "uv": "12"
+        },
+        {
+          "utm_source": "facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ABQ | June 6 | Retarget",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245133532220564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "874",
+          "uv": "863"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "184",
+          "uv": "118"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "168",
+          "uv": "147"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "18",
+          "uv": "17"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "14",
+          "uv": "11"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "9",
+          "uv": "5"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "31d306e5-6212-4970-8160-1dd56f43d0a6",
+          "first_visit": "2026-04-23T14:57:52.044Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-04T20:53:21.169Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "3"
+        },
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-04-24T03:36:29.692Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-11T21:23:44.298Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://adsmanager.facebook.com/",
+          "cta_clicks": "3",
+          "rs_count": "5"
+        },
+        {
+          "anonymous_id": "8205c5c3-b689-4a59-a05c-de7636b833c5",
+          "first_visit": "2026-04-28T00:32:54.219Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-07T03:59:12.255Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "c1c06309-3095-4ccc-ac55-3bea8d39986e",
+          "first_visit": "2026-04-28T15:12:23.292Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-04-28T15:17:12.586Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://l.instagram.com/",
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "9464646c-99a5-4caf-8dad-1af305633b5c",
+          "first_visit": "2026-04-28T21:58:34.148Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "android-app://com.google.android.gm/",
+          "last_visit": "2026-04-28T21:58:34.148Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "android-app://com.google.android.gm/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "793e6332-a246-4ea9-90b9-4ee86be66075",
+          "first_visit": "2026-05-02T14:35:02.690Z",
+          "first_src": "ig",
+          "first_med": "social",
+          "first_camp": null,
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-08T01:42:11.354Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://l.instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "70fe62f6-39f8-45d5-b9a1-a708726f5938",
+          "first_visit": "2026-05-02T15:57:37.671Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-02T15:57:37.671Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "eb6eada2-7000-4588-a9f0-c740fc71f106",
+          "first_visit": "2026-05-02T16:00:13.653Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-02T16:00:13.653Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "6b3c95ae-af69-43b8-970d-e70a99010bb7",
+          "first_visit": "2026-05-02T16:00:26.914Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-02T16:00:26.914Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "19c53d52-d374-4a2e-a946-fb60372b7126",
+          "first_visit": "2026-05-03T17:55:59.890Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-05T01:00:25.032Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "0",
+          "rs_count": "5"
+        },
+        {
+          "anonymous_id": "fa9b9e94-5558-461d-8041-0c529855356a",
+          "first_visit": "2026-05-03T17:56:37.198Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-03T17:56:37.198Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "05267b39-4f11-4a7e-8dca-b4d3147db959",
+          "first_visit": "2026-05-03T17:56:58.878Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://app.universalspeedrating.com/events/7/register",
+          "last_visit": "2026-05-03T17:56:58.878Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/7/register",
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "46a384fc-9a31-4fe5-b0bc-20fbdd47691e",
+          "first_visit": "2026-05-04T00:34:35.019Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-04T01:41:11.371Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "10715ff3-9c79-4a43-8947-e05c84fcc4dc",
+          "first_visit": "2026-05-04T19:22:53.843Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-04T19:22:53.843Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "db7e4eca-2116-424b-8afb-35ab52cc8896",
+          "first_visit": "2026-05-05T23:45:33.894Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-07T22:10:58.618Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "9c2465fb-6f4a-4977-bef0-ad0361822f4d",
+          "first_visit": "2026-05-07T02:23:42.341Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-07T02:24:35.046Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "b843dc40-154a-4684-9c9e-7d61872001a0",
+          "first_visit": "2026-05-07T14:47:00.657Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-08T15:07:47.739Z",
+          "last_src": "Facebook",
+          "last_med": "paid",
+          "last_camp": "USR | ABQ | June6 | Traffic",
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "ba2fdbdb-0fb6-44d2-89a3-b9542e796c1b",
+          "first_visit": "2026-05-07T16:51:55.378Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-07T17:41:45.337Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "b770c042-5eb6-4bb1-9a71-2ea5d6208301",
+          "first_visit": "2026-05-07T18:10:16.001Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-07T18:10:16.001Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "44e52e03-56d6-4de1-9012-6e022c873a8e",
+          "first_visit": "2026-05-07T20:00:08.833Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-07T20:03:16.868Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "eecf7d35-2161-4eb2-b816-61ec618e3c5a",
+          "first_visit": "2026-05-07T20:34:37.088Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-11T19:40:29.571Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "bdcb6a46-1c5d-4de4-88dd-3f3ef1e2a0e2",
+          "first_visit": "2026-05-08T03:42:21.615Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-08T14:45:26.587Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "c751c380-1f1c-4c38-9bd1-1ca0f66d26d3",
+          "first_visit": "2026-05-08T21:54:38.435Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-08T21:54:38.435Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "69b8d9cd-81cc-4e89-b6e0-db25d7d3956e",
+          "first_visit": "2026-05-09T01:21:47.092Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "android-app://com.google.android.gm/",
+          "last_visit": "2026-05-11T17:47:05.588Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "android-app://com.google.android.gm/",
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "508d6d3f-830f-4da8-8277-6809c0b96ee4",
+          "first_visit": "2026-05-09T14:01:31.800Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-09T14:01:31.800Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "8371f030-3375-48f1-93f9-8976932055af",
+          "first_visit": "2026-05-09T15:22:02.545Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-09T18:11:47.236Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "a326e981-31a9-4c45-8264-f3a6854d0ef7",
+          "first_visit": "2026-05-09T23:30:45.134Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-09T23:31:47.747Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/7/register",
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "3bdf79a4-8878-4f2d-afcb-831f7a4fbeee",
+          "first_visit": "2026-05-11T20:17:15.114Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-12T03:08:41.997Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/7?fbclid=PAVERFWARvGJhleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaeiXiVREIuMJzmfo_q2cdzNXXYe76h0RB8vTTYwg_AfkDShMDEY0WXg9esBXA_aem_SLWAWv38pfiLj451Nu75Rg",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "cb7539c4-7418-4efc-9d61-c98e07850def",
+          "first_visit": "2026-05-12T00:19:31.285Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-12T04:49:55.997Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "dc3700d4-f0ad-4112-9656-3035511e7695",
+          "first_visit": "2026-05-12T00:20:03.370Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-12T00:20:03.370Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "bfa23b38-1185-40f4-884e-d6ac0ecf9975",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [
+        {
+          "registration_id": "6",
+          "user_id": "athlete:133556",
+          "reg_at": "2026-04-28T22:06:28.939Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "7",
+          "user_id": "athlete:133855",
+          "reg_at": "2026-05-02T17:02:54.994Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "8",
+          "user_id": "athlete:96475",
+          "reg_at": "2026-05-03T17:58:57.785Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "9",
+          "user_id": "athlete:134436",
+          "reg_at": "2026-05-04T21:05:18.153Z",
+          "amount_charged": "7500",
+          "subtotal": "9500",
+          "discount_amount": "2000",
+          "coupon_code": "1",
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "10",
+          "user_id": "athlete:124149",
+          "reg_at": "2026-05-06T23:47:06.669Z",
+          "amount_charged": "8500",
+          "subtotal": "9500",
+          "discount_amount": "1000",
+          "coupon_code": "2",
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "11",
+          "user_id": "athlete:134603",
+          "reg_at": "2026-05-07T14:48:45.082Z",
+          "amount_charged": "8500",
+          "subtotal": "9500",
+          "discount_amount": "1000",
+          "coupon_code": "2",
+          "event_name": "Transcend Showcase"
+        },
+        {
+          "registration_id": "16",
+          "user_id": "athlete:135089",
+          "reg_at": "2026-05-09T14:16:01.166Z",
+          "amount_charged": "8500",
+          "subtotal": "9500",
+          "discount_amount": "1000",
+          "coupon_code": "2",
+          "event_name": "USR Showcase: New Mexico"
+        },
+        {
+          "registration_id": "17",
+          "user_id": "athlete:133058",
+          "reg_at": "2026-05-09T23:33:00.484Z",
+          "amount_charged": "8500",
+          "subtotal": "9500",
+          "discount_amount": "1000",
+          "coupon_code": "2",
+          "event_name": "USR Showcase: New Mexico"
+        },
+        {
+          "registration_id": "19",
+          "user_id": "athlete:54906",
+          "reg_at": "2026-05-11T20:37:18.228Z",
+          "amount_charged": "8500",
+          "subtotal": "9500",
+          "discount_amount": "1000",
+          "coupon_code": "2",
+          "event_name": "USR Showcase: New Mexico"
+        }
+      ],
+      "paid_attribution": [
+        {
+          "registration_id": "6",
+          "user_id": "athlete:133556",
+          "reg_at": "2026-04-28T22:06:28.939Z",
+          "anonymous_id": "9464646c-99a5-4caf-8dad-1af305633b5c",
+          "bridge_evt": "reg_started",
+          "gap_sec": 466.843,
+          "visit_count": "1",
+          "first_visit": "2026-04-28T21:58:34.148Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": "android-app://com.google.android.gm/",
+          "last_visit": "2026-04-28T21:58:34.148Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": "android-app://com.google.android.gm/"
+        },
+        {
+          "registration_id": "8",
+          "user_id": "athlete:96475",
+          "reg_at": "2026-05-03T17:58:57.785Z",
+          "anonymous_id": "05267b39-4f11-4a7e-8dca-b4d3147db959",
+          "bridge_evt": "reg_started",
+          "gap_sec": 118.907,
+          "visit_count": "1",
+          "first_visit": "2026-05-03T17:56:58.878Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": "https://app.universalspeedrating.com/events/7/register",
+          "last_visit": "2026-05-03T17:56:58.878Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": "https://app.universalspeedrating.com/events/7/register"
+        },
+        {
+          "registration_id": "9",
+          "user_id": "athlete:134436",
+          "reg_at": "2026-05-04T21:05:18.153Z",
+          "anonymous_id": "8205c5c3-b689-4a59-a05c-de7636b833c5",
+          "bridge_evt": "reg_started",
+          "gap_sec": 151.687,
+          "visit_count": "5",
+          "first_visit": "2026-04-28T00:32:54.219Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-07T03:59:12.255Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": null
+        },
+        {
+          "registration_id": "11",
+          "user_id": "athlete:134603",
+          "reg_at": "2026-05-07T14:48:45.082Z",
+          "anonymous_id": "b843dc40-154a-4684-9c9e-7d61872001a0",
+          "bridge_evt": "reg_started",
+          "gap_sec": 101.742,
+          "visit_count": "5",
+          "first_visit": "2026-05-07T14:47:00.657Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-08T15:07:47.739Z",
+          "last_src": "Facebook",
+          "last_med": "paid",
+          "last_camp": "USR | ABQ | June6 | Traffic",
+          "last_ref": "https://instagram.com/"
+        },
+        {
+          "registration_id": "16",
+          "user_id": "athlete:135089",
+          "reg_at": "2026-05-09T14:16:01.166Z",
+          "anonymous_id": "508d6d3f-830f-4da8-8277-6809c0b96ee4",
+          "bridge_evt": "reg_started",
+          "gap_sec": 77.792,
+          "visit_count": "1",
+          "first_visit": "2026-05-09T14:01:31.800Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-09T14:01:31.800Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": null
+        },
+        {
+          "registration_id": "17",
+          "user_id": "athlete:133058",
+          "reg_at": "2026-05-09T23:33:00.484Z",
+          "anonymous_id": "a326e981-31a9-4c45-8264-f3a6854d0ef7",
+          "bridge_evt": "reg_started",
+          "gap_sec": 72.74,
+          "visit_count": "2",
+          "first_visit": "2026-05-09T23:30:45.134Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-09T23:31:47.747Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": "https://app.universalspeedrating.com/events/7/register"
+        }
+      ],
+      "paid_unattributed": [
+        {
+          "registration_id": "7",
+          "user_id": "athlete:133855",
+          "reg_at": "2026-05-02T17:02:54.994Z"
+        },
+        {
+          "registration_id": "10",
+          "user_id": "athlete:124149",
+          "reg_at": "2026-05-06T23:47:06.669Z"
+        },
+        {
+          "registration_id": "19",
+          "user_id": "athlete:54906",
+          "reg_at": "2026-05-11T20:37:18.228Z"
+        }
+      ],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "596",
+          "pv": "596",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "fb",
+          "uv": "332",
+          "pv": "332",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "182",
+          "pv": "182",
+          "cta_unique": "24",
+          "rs_unique": "29"
+        },
+        {
+          "src": "ig",
+          "uv": "32",
+          "pv": "32",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        },
+        {
+          "src": "facebook",
+          "uv": "5",
+          "pv": "5",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "th",
+          "uv": "1",
+          "pv": "1",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    },
+    "8": {
+      "event_id": "8",
+      "page_path": "/events/8",
+      "current_name": "USR Showcase: Nebraska",
+      "former_names": [
+        "Veritas Athletic Performance Showcase"
+      ],
+      "summary": {
+        "pv": "543",
+        "uv": "411",
+        "first_seen": "2026-04-24T04:03:27.414Z",
+        "last_seen": "2026-05-12T06:07:20.272Z",
+        "cta_clicks": "16",
+        "cta_unique": "15",
+        "rs_count": "19",
+        "rs_unique": "15",
+        "rc_count": "5",
+        "rc_unique": "5",
+        "rc_revenue_cents": "45500",
+        "rc_subtotal_cents": "47500",
+        "rc_discount_cents": "2000",
+        "ps_count": "5",
+        "ps_unique": "5",
+        "ps_amount_cents": "45500"
+      },
+      "daily": [
+        {
+          "d": "2026-04-24T00:00:00.000Z",
+          "pv": "5",
+          "uv": "4",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-27T00:00:00.000Z",
+          "pv": "32",
+          "uv": "21",
+          "cta": "2",
+          "rs": "3",
+          "rc": "2",
+          "ps": "2"
+        },
+        {
+          "d": "2026-04-28T00:00:00.000Z",
+          "pv": "18",
+          "uv": "10",
+          "cta": "4",
+          "rs": "4",
+          "rc": "2",
+          "ps": "2"
+        },
+        {
+          "d": "2026-04-29T00:00:00.000Z",
+          "pv": "22",
+          "uv": "17",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-30T00:00:00.000Z",
+          "pv": "18",
+          "uv": "11",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-01T00:00:00.000Z",
+          "pv": "18",
+          "uv": "11",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-02T00:00:00.000Z",
+          "pv": "3",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-03T00:00:00.000Z",
+          "pv": "5",
+          "uv": "3",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-04T00:00:00.000Z",
+          "pv": "9",
+          "uv": "6",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-05T00:00:00.000Z",
+          "pv": "4",
+          "uv": "4",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-06T00:00:00.000Z",
+          "pv": "49",
+          "uv": "42",
+          "cta": "1",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-07T00:00:00.000Z",
+          "pv": "50",
+          "uv": "44",
+          "cta": "3",
+          "rs": "3",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "90",
+          "uv": "71",
+          "cta": "1",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "67",
+          "uv": "60",
+          "cta": "1",
+          "rs": "1",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "81",
+          "uv": "79",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "55",
+          "uv": "51",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "17",
+          "uv": "17",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "279",
+          "uv": "154"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | NEB | June13 | Traffic",
+          "utm_content": "USR | NEB | june13 | Ad4 | RecruitingExposure",
+          "utm_term": "120245418117990564",
+          "utm_id": "120245418117980564",
+          "pv": "84",
+          "uv": "84"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "utm_content": "120245418945160564",
+          "utm_term": "120245418118010564",
+          "utm_id": "120245418117980564",
+          "pv": "61",
+          "uv": "59"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | NEB | June13 | Traffic",
+          "utm_content": "USR | NEB | june13 | Ad6 | WhereTheyRank",
+          "utm_term": "120245418117970564",
+          "utm_id": "120245418117980564",
+          "pv": "54",
+          "uv": "53"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | NEB | June13 | Traffic",
+          "utm_content": "USR | NEB | june13 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245418118010564",
+          "utm_id": "120245418117980564",
+          "pv": "25",
+          "uv": "25"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "utm_content": "120245418985230564",
+          "utm_term": "120245418117970564",
+          "utm_id": "120245418117980564",
+          "pv": "15",
+          "uv": "13"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "utm_content": "120245418985230564",
+          "utm_term": "120245418117970564",
+          "utm_id": "120245418117980564",
+          "pv": "9",
+          "uv": "8"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+NEB+%7C+June13+%7C+Traffic",
+          "utm_content": "USR+%7C+NEB+%7C+june13+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+NEB+%7C+June13+%7C+Traffic",
+          "utm_content": "USR+%7C+NEB+%7C+june13+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+NEB+%7C+June13+%7C+Traffic",
+          "utm_content": "USR+%7C+NEB+%7C+june13+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "utm_content": "120245418945160564",
+          "utm_term": "120245418118010564",
+          "utm_id": "120245418117980564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "279",
+          "uv": "154"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | NEB | June13 | Traffic",
+          "pv": "163",
+          "uv": "162"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "pv": "76",
+          "uv": "72"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+NEB+%7C+June13+%7C+Traffic",
+          "pv": "12",
+          "uv": "12"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245418117980564",
+          "pv": "10",
+          "uv": "9"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "251",
+          "uv": "240"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "228",
+          "uv": "123"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "50",
+          "uv": "46"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "7",
+          "uv": "7"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "4",
+          "uv": "3"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "2",
+          "uv": "1"
+        },
+        {
+          "referrer_host": "linktr.ee",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "f1a9e40d-1f36-4452-9831-5c2ba28c6338",
+          "first_visit": "2026-04-24T04:03:27.414Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-05T16:45:26.966Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-04-27T01:32:28.044Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-06T15:54:19.381Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://adsmanager.facebook.com/",
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "f3bc0e0f-5a01-4844-b2ea-d454ef63d4e7",
+          "first_visit": "2026-04-27T19:08:53.053Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-09T02:55:03.078Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "09bfa79b-1aa4-42bd-95a5-4f2fcc419152",
+          "first_visit": "2026-04-27T19:14:27.654Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-04-27T19:21:50.812Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/8/register",
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "46f32555-abb6-4788-8838-e28a7c10b11a",
+          "first_visit": "2026-04-27T19:26:17.460Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-04-28T18:02:39.845Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/8",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "f9a22f43-e426-4eb9-9613-e12e8f6c7940",
+          "first_visit": "2026-04-27T21:07:40.511Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-11T21:46:59.777Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "e0794fac-46ce-4322-8afc-b681996a1733",
+          "first_visit": "2026-04-28T02:14:51.083Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-08T15:53:49.998Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/8",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "0fcd7e98-d7d6-472d-8b4b-4f62b477e676",
+          "first_visit": "2026-04-28T02:29:55.316Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-04-28T02:35:01.986Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "a3aad1cc-5ef3-4a80-9a24-5c9641e121dc",
+          "first_visit": "2026-04-28T19:38:40.199Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-04-28T19:38:40.199Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "98f598cc-ebe6-46c4-9d33-7c8eed7d18f6",
+          "first_visit": "2026-04-29T19:46:46.320Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-11T20:00:20.321Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "98c991bd-0fab-46d3-9084-763f8d841eba",
+          "first_visit": "2026-05-01T21:04:00.186Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-01T21:04:00.186Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "70ddfe1b-8b8f-4ed2-94a3-771daa6e13b5",
+          "first_visit": "2026-05-07T00:54:38.218Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-08T16:07:43.925Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "2c64fef0-c87e-4b67-9868-1a3dda15c23a",
+          "first_visit": "2026-05-07T03:19:55.580Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-07T05:01:50.360Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "5a73be9c-9def-47ac-9ecc-5dc9768528c0",
+          "first_visit": "2026-05-08T11:45:17.393Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-08T22:03:23.276Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "daa75b9f-324b-47e4-9539-fdfa06efdb2e",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [
+        {
+          "registration_id": "2",
+          "user_id": "athlete:125698",
+          "reg_at": "2026-04-27T19:24:27.011Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Veritas Athletic Performance Showcase"
+        },
+        {
+          "registration_id": "3",
+          "user_id": "athlete:133462",
+          "reg_at": "2026-04-27T21:09:56.093Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Veritas Athletic Performance Showcase"
+        },
+        {
+          "registration_id": "4",
+          "user_id": "athlete:133494",
+          "reg_at": "2026-04-28T02:19:56.936Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Veritas Athletic Performance Showcase"
+        },
+        {
+          "registration_id": "5",
+          "user_id": "athlete:101686",
+          "reg_at": "2026-04-28T02:37:27.924Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "Veritas Athletic Performance Showcase"
+        },
+        {
+          "registration_id": "15",
+          "user_id": "athlete:135083",
+          "reg_at": "2026-05-09T02:59:03.362Z",
+          "amount_charged": "7500",
+          "subtotal": "9500",
+          "discount_amount": "2000",
+          "coupon_code": "3",
+          "event_name": "USR Showcase: Nebraska"
+        }
+      ],
+      "paid_attribution": [
+        {
+          "registration_id": "2",
+          "user_id": "athlete:125698",
+          "reg_at": "2026-04-27T19:24:27.011Z",
+          "anonymous_id": "09bfa79b-1aa4-42bd-95a5-4f2fcc419152",
+          "bridge_evt": "reg_started",
+          "gap_sec": 156.199,
+          "visit_count": "2",
+          "first_visit": "2026-04-27T19:14:27.654Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-04-27T19:21:50.812Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": "https://app.universalspeedrating.com/events/8/register"
+        },
+        {
+          "registration_id": "3",
+          "user_id": "athlete:133462",
+          "reg_at": "2026-04-27T21:09:56.093Z",
+          "anonymous_id": "f9a22f43-e426-4eb9-9613-e12e8f6c7940",
+          "bridge_evt": "reg_started",
+          "gap_sec": 109.538,
+          "visit_count": "9",
+          "first_visit": "2026-04-27T21:07:40.511Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-11T21:46:59.777Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": null
+        },
+        {
+          "registration_id": "4",
+          "user_id": "athlete:133494",
+          "reg_at": "2026-04-28T02:19:56.936Z",
+          "anonymous_id": "e0794fac-46ce-4322-8afc-b681996a1733",
+          "bridge_evt": "reg_started",
+          "gap_sec": 159.014,
+          "visit_count": "5",
+          "first_visit": "2026-04-28T02:14:51.083Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-08T15:53:49.998Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": "https://app.universalspeedrating.com/events/8"
+        },
+        {
+          "registration_id": "5",
+          "user_id": "athlete:101686",
+          "reg_at": "2026-04-28T02:37:27.924Z",
+          "anonymous_id": "0fcd7e98-d7d6-472d-8b4b-4f62b477e676",
+          "bridge_evt": "reg_started",
+          "gap_sec": 425.665,
+          "visit_count": "2",
+          "first_visit": "2026-04-28T02:29:55.316Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-04-28T02:35:01.986Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": null
+        },
+        {
+          "registration_id": "15",
+          "user_id": "athlete:135083",
+          "reg_at": "2026-05-09T02:59:03.362Z",
+          "anonymous_id": "f3bc0e0f-5a01-4844-b2ea-d454ef63d4e7",
+          "bridge_evt": "reg_started",
+          "gap_sec": 238.852,
+          "visit_count": "4",
+          "first_visit": "2026-04-27T19:08:53.053Z",
+          "first_src": "(direct/none)",
+          "first_med": "(none)",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-09T02:55:03.078Z",
+          "last_src": "(direct/none)",
+          "last_med": "(none)",
+          "last_camp": "(none)",
+          "last_ref": null
+        }
+      ],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "176",
+          "pv": "176",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "154",
+          "pv": "154",
+          "cta_unique": "14",
+          "rs_unique": "14"
+        },
+        {
+          "src": "fb",
+          "uv": "72",
+          "pv": "72",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "ig",
+          "uv": "9",
+          "pv": "9",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    },
+    "9": {
+      "event_id": "9",
+      "page_path": "/events/9",
+      "current_name": "USR Showcase: Southern California",
+      "former_names": [
+        "OC Speed Lab Showcase",
+        "Spellman Performance Showcase"
+      ],
+      "summary": {
+        "pv": "390",
+        "uv": "364",
+        "first_seen": "2026-04-24T21:40:39.014Z",
+        "last_seen": "2026-05-12T06:23:16.985Z",
+        "cta_clicks": "4",
+        "cta_unique": "2",
+        "rs_count": "4",
+        "rs_unique": "3",
+        "rc_count": "0",
+        "rc_unique": "0",
+        "rc_revenue_cents": null,
+        "rc_subtotal_cents": null,
+        "rc_discount_cents": null,
+        "ps_count": "0",
+        "ps_unique": "0",
+        "ps_amount_cents": null
+      },
+      "daily": [
+        {
+          "d": "2026-04-24T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-29T00:00:00.000Z",
+          "pv": "2",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-30T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-01T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-05T00:00:00.000Z",
+          "pv": "2",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-06T00:00:00.000Z",
+          "pv": "63",
+          "uv": "58",
+          "cta": "0",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-07T00:00:00.000Z",
+          "pv": "62",
+          "uv": "59",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "44",
+          "uv": "42",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "60",
+          "uv": "57",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "62",
+          "uv": "57",
+          "cta": "3",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "81",
+          "uv": "80",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "11",
+          "uv": "11",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | OC | June27 | Traffic",
+          "utm_content": "USR | OC | june27 | Ad4 | RecruitingExposure",
+          "utm_term": "120245420538750564",
+          "utm_id": "120245420538790564",
+          "pv": "111",
+          "uv": "105"
+        },
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "56",
+          "uv": "47"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "utm_content": "120245421176980564",
+          "utm_term": "120245420538780564",
+          "utm_id": "120245420538790564",
+          "pv": "48",
+          "uv": "47"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "utm_content": "120245421180150564",
+          "utm_term": "120245420538810564",
+          "utm_id": "120245420538790564",
+          "pv": "45",
+          "uv": "45"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "utm_content": "120245421180150564",
+          "utm_term": "120245420538810564",
+          "utm_id": "120245420538790564",
+          "pv": "36",
+          "uv": "32"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | OC | June27 | Traffic",
+          "utm_content": "USR | OC | june27 | Ad6 | WhereTheyRank",
+          "utm_term": "120245420538780564",
+          "utm_id": "120245420538790564",
+          "pv": "29",
+          "uv": "27"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "utm_content": "120245421176980564",
+          "utm_term": "120245420538780564",
+          "utm_id": "120245420538790564",
+          "pv": "27",
+          "uv": "27"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | OC | June27 | Traffic",
+          "utm_content": "USR | OC | june27 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245420538810564",
+          "utm_id": "120245420538790564",
+          "pv": "21",
+          "uv": "19"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+OC+%7C+June27+%7C+Traffic",
+          "utm_content": "USR+%7C+OC+%7C+june27+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+OC+%7C+June27+%7C+Traffic",
+          "utm_content": "USR+%7C+OC+%7C+june27+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+OC+%7C+June27+%7C+Traffic",
+          "utm_content": "USR+%7C+OC+%7C+june27+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "utm_content": "120245421176980564",
+          "utm_term": "120245420538780564",
+          "utm_id": "120245420538790564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | OC | June27 | Traffic",
+          "pv": "161",
+          "uv": "151"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "pv": "84",
+          "uv": "79"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "pv": "72",
+          "uv": "72"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "56",
+          "uv": "47"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+OC+%7C+June27+%7C+Traffic",
+          "pv": "13",
+          "uv": "13"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245420538790564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "instagram.com",
+          "pv": "186",
+          "uv": "176"
+        },
+        {
+          "referrer_host": "facebook.com",
+          "pv": "162",
+          "uv": "155"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "37",
+          "uv": "33"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "2",
+          "uv": "2"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-04-29T12:59:24.318Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-06T15:59:59.129Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://adsmanager.facebook.com/",
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "eed3f559-56c8-419b-b636-84cabcac307f",
+          "first_visit": "2026-05-01T20:59:02.925Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-01T20:59:02.925Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "a8cb05c3-0a74-4cfe-b8e9-f639c0f85f30",
+          "first_visit": "2026-05-10T05:47:31.186Z",
+          "first_src": "Facebook",
+          "first_med": "paid",
+          "first_camp": "USR | OC | June27 | Traffic",
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-10T05:48:33.607Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/9/register",
+          "cta_clicks": "3",
+          "rs_count": "2"
+        }
+      ],
+      "paid_regs": [],
+      "paid_attribution": [],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "166",
+          "pv": "166",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        },
+        {
+          "src": "ig",
+          "uv": "79",
+          "pv": "79",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "fb",
+          "uv": "72",
+          "pv": "72",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "46",
+          "pv": "46",
+          "cta_unique": "1",
+          "rs_unique": "2"
+        },
+        {
+          "src": "th",
+          "uv": "1",
+          "pv": "1",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    },
+    "10": {
+      "event_id": "10",
+      "page_path": "/events/10",
+      "current_name": "USR Showcase: Washington",
+      "former_names": [
+        "New Athlete Showcase"
+      ],
+      "summary": {
+        "pv": "243",
+        "uv": "228",
+        "first_seen": "2026-04-23T16:17:12.836Z",
+        "last_seen": "2026-05-12T06:36:22.879Z",
+        "cta_clicks": "1",
+        "cta_unique": "1",
+        "rs_count": "3",
+        "rs_unique": "2",
+        "rc_count": "0",
+        "rc_unique": "0",
+        "rc_revenue_cents": null,
+        "rc_subtotal_cents": null,
+        "rc_discount_cents": null,
+        "ps_count": "0",
+        "ps_unique": "0",
+        "ps_amount_cents": null
+      },
+      "daily": [
+        {
+          "d": "2026-04-23T00:00:00.000Z",
+          "pv": "2",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "2",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "4",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "117",
+          "uv": "112",
+          "cta": "0",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "94",
+          "uv": "90",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "24",
+          "uv": "24",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | WA | July15 | Traffic",
+          "utm_content": "USR | WA | July15 | Ad4 | RecruitingExposure",
+          "utm_term": "120245656930210564",
+          "utm_id": "120245656930200564",
+          "pv": "60",
+          "uv": "58"
+        },
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "51",
+          "uv": "41"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "utm_content": "120245657060380564",
+          "utm_term": "120245656930190564",
+          "utm_id": "120245656930200564",
+          "pv": "37",
+          "uv": "36"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "utm_content": "120245657081290564",
+          "utm_term": "120245656930170564",
+          "utm_id": "120245656930200564",
+          "pv": "21",
+          "uv": "21"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "utm_content": "120245657081290564",
+          "utm_term": "120245656930170564",
+          "utm_id": "120245656930200564",
+          "pv": "20",
+          "uv": "20"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | WA | July15 | Traffic",
+          "utm_content": "USR | WA | July15 | Ad6 | WhereTheyRank",
+          "utm_term": "120245656930170564",
+          "utm_id": "120245656930200564",
+          "pv": "16",
+          "uv": "16"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | WA | July15 | Traffic",
+          "utm_content": "USR | WA | July15 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245656930190564",
+          "utm_id": "120245656930200564",
+          "pv": "15",
+          "uv": "14"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+WA+%7C+July15+%7C+Traffic",
+          "utm_content": "USR+%7C+WA+%7C+July15+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+WA+%7C+July15+%7C+Traffic",
+          "utm_content": "USR+%7C+WA+%7C+July15+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+WA+%7C+July15+%7C+Traffic",
+          "utm_content": "USR+%7C+WA+%7C+July15+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "utm_content": "120245657060380564",
+          "utm_term": "120245656930190564",
+          "utm_id": "120245656930200564",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "utm_content": "120245657081290564",
+          "utm_term": "120245656930170564",
+          "utm_id": "120245656930200564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | WA | July15 | Traffic",
+          "pv": "91",
+          "uv": "88"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "pv": "57",
+          "uv": "56"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "51",
+          "uv": "41"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "pv": "25",
+          "uv": "25"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+WA+%7C+July15+%7C+Traffic",
+          "pv": "15",
+          "uv": "15"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "utm_source": "th",
+          "utm_medium": "paid",
+          "utm_campaign": "120245656930200564",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "141",
+          "uv": "136"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "64",
+          "uv": "61"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "32",
+          "uv": "30"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "4",
+          "uv": "1"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "2",
+          "uv": "2"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-05-08T20:50:33.545Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://www.google.com/",
+          "last_visit": "2026-05-10T01:00:54.263Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://adsmanager.facebook.com/",
+          "cta_clicks": "0",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "6e9ed080-4d30-44f0-a37b-a6684ba5bfb6",
+          "first_visit": "2026-05-11T02:12:21.086Z",
+          "first_src": "Facebook",
+          "first_med": "paid",
+          "first_camp": "USR | WA | July15 | Traffic",
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-11T02:15:24.746Z",
+          "last_src": "Facebook",
+          "last_med": "paid",
+          "last_camp": "USR | WA | July15 | Traffic",
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [],
+      "paid_attribution": [],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "105",
+          "pv": "105",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        },
+        {
+          "src": "fb",
+          "uv": "56",
+          "pv": "56",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "41",
+          "pv": "41",
+          "cta_unique": "0",
+          "rs_unique": "1"
+        },
+        {
+          "src": "ig",
+          "uv": "25",
+          "pv": "25",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "th",
+          "uv": "1",
+          "pv": "1",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    },
+    "11": {
+      "event_id": "11",
+      "page_path": "/events/11",
+      "current_name": "USR Showcase: Massachusetts",
+      "former_names": [
+        "Catano Performance Showcase"
+      ],
+      "summary": {
+        "pv": "242",
+        "uv": "233",
+        "first_seen": "2026-04-23T18:55:06.717Z",
+        "last_seen": "2026-05-12T05:42:26.627Z",
+        "cta_clicks": "2",
+        "cta_unique": "2",
+        "rs_count": "4",
+        "rs_unique": "3",
+        "rc_count": "0",
+        "rc_unique": "0",
+        "rc_revenue_cents": null,
+        "rc_subtotal_cents": null,
+        "rc_discount_cents": null,
+        "ps_count": "0",
+        "ps_unique": "0",
+        "ps_amount_cents": null
+      },
+      "daily": [
+        {
+          "d": "2026-04-23T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "3",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "125",
+          "uv": "119",
+          "cta": "0",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "98",
+          "uv": "98",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "15",
+          "uv": "14",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | MA | July17 | Traffic",
+          "utm_content": "USR | MA | July17 | Ad4 | RecruitingExposure",
+          "utm_term": "120245657070610564",
+          "utm_id": "120245657070560564",
+          "pv": "69",
+          "uv": "67"
+        },
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "56",
+          "uv": "50"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | MA | July17 | Traffic",
+          "utm_content": "USR | MA | July17 | Ad6 | WhereTheyRank",
+          "utm_term": "120245657070590564",
+          "utm_id": "120245657070560564",
+          "pv": "34",
+          "uv": "34"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "utm_content": "120245657155500564",
+          "utm_term": "120245657070630564",
+          "utm_id": "120245657070560564",
+          "pv": "26",
+          "uv": "26"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "utm_content": "120245657159320564",
+          "utm_term": "120245657070590564",
+          "utm_id": "120245657070560564",
+          "pv": "13",
+          "uv": "13"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | MA | July17 | Traffic",
+          "utm_content": "USR | MA | July17 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245657070630564",
+          "utm_id": "120245657070560564",
+          "pv": "12",
+          "uv": "11"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "utm_content": "120245657159320564",
+          "utm_term": "120245657070590564",
+          "utm_id": "120245657070560564",
+          "pv": "8",
+          "uv": "8"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "utm_content": "120245657155500564",
+          "utm_term": "120245657070630564",
+          "utm_id": "120245657070560564",
+          "pv": "7",
+          "uv": "7"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+MA+%7C+July17+%7C+Traffic",
+          "utm_content": "USR+%7C+MA+%7C+July17+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+MA+%7C+July17+%7C+Traffic",
+          "utm_content": "USR+%7C+MA+%7C+July17+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+MA+%7C+July17+%7C+Traffic",
+          "utm_content": "USR+%7C+MA+%7C+July17+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | MA | July17 | Traffic",
+          "pv": "115",
+          "uv": "112"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "56",
+          "uv": "50"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "pv": "39",
+          "uv": "39"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657070560564",
+          "pv": "15",
+          "uv": "15"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+MA+%7C+July17+%7C+Traffic",
+          "pv": "14",
+          "uv": "14"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "128",
+          "uv": "124"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "74",
+          "uv": "74"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "34",
+          "uv": "33"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "3",
+          "uv": "2"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "2",
+          "uv": "2"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-05-09T23:14:33.123Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://www.google.com/",
+          "last_visit": "2026-05-10T01:10:24.910Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://adsmanager.facebook.com/",
+          "cta_clicks": "0",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "64f3542f-ba48-4df5-8f53-2af3fb2e8529",
+          "first_visit": "2026-05-11T00:21:45.171Z",
+          "first_src": "Facebook",
+          "first_med": "paid",
+          "first_camp": "USR | MA | July17 | Traffic",
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-11T00:21:45.171Z",
+          "last_src": "Facebook",
+          "last_med": "paid",
+          "last_camp": "USR | MA | July17 | Traffic",
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "c315597a-ba30-4959-a6de-9f603d13693e",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [],
+      "paid_attribution": [],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "129",
+          "pv": "129",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "50",
+          "pv": "50",
+          "cta_unique": "0",
+          "rs_unique": "1"
+        },
+        {
+          "src": "fb",
+          "uv": "39",
+          "pv": "39",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "ig",
+          "uv": "15",
+          "pv": "15",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    },
+    "13": {
+      "event_id": "13",
+      "page_path": "/events/13",
+      "current_name": "USR Showcase: Colorado",
+      "former_names": [
+        "Pursuit Sports Performance Showcase"
+      ],
+      "summary": {
+        "pv": "272",
+        "uv": "256",
+        "first_seen": "2026-05-07T15:36:20.788Z",
+        "last_seen": "2026-05-12T05:43:47.561Z",
+        "cta_clicks": "2",
+        "cta_unique": "2",
+        "rs_count": "3",
+        "rs_unique": "3",
+        "rc_count": "0",
+        "rc_unique": "0",
+        "rc_revenue_cents": null,
+        "rc_subtotal_cents": null,
+        "rc_discount_cents": null,
+        "ps_count": "0",
+        "ps_unique": "0",
+        "ps_amount_cents": null
+      },
+      "daily": [
+        {
+          "d": "2026-05-07T00:00:00.000Z",
+          "pv": "5",
+          "uv": "3",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "58",
+          "uv": "56",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-09T00:00:00.000Z",
+          "pv": "50",
+          "uv": "48",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "53",
+          "uv": "51",
+          "cta": "0",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "79",
+          "uv": "75",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "27",
+          "uv": "27",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | CO | July25 | Traffic",
+          "utm_content": "USR | CO | July25 | Ad4 | RecruitingExposure",
+          "utm_term": "120245567832820564",
+          "utm_id": "120245567832780564",
+          "pv": "71",
+          "uv": "66"
+        },
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "53",
+          "uv": "46"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "utm_content": "120245568635220564",
+          "utm_term": "120245567832840564",
+          "utm_id": "120245567832780564",
+          "pv": "36",
+          "uv": "36"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | CO | July25 | Traffic",
+          "utm_content": "USR | CO | July25 | Ad6 | WhereTheyRank",
+          "utm_term": "120245567832830564",
+          "utm_id": "120245567832780564",
+          "pv": "28",
+          "uv": "28"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "utm_content": "120245568676030564",
+          "utm_term": "120245567832830564",
+          "utm_id": "120245567832780564",
+          "pv": "25",
+          "uv": "25"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | CO | July25 | Traffic",
+          "utm_content": "USR | CO | July25 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245567832840564",
+          "utm_id": "120245567832780564",
+          "pv": "19",
+          "uv": "19"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "utm_content": "120245568676030564",
+          "utm_term": "120245567832830564",
+          "utm_id": "120245567832780564",
+          "pv": "14",
+          "uv": "14"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "utm_content": "120245568635220564",
+          "utm_term": "120245567832840564",
+          "utm_id": "120245567832780564",
+          "pv": "9",
+          "uv": "9"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+CO+%7C+July25+%7C+Traffic",
+          "utm_content": "USR+%7C+CO+%7C+July25+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+CO+%7C+July25+%7C+Traffic",
+          "utm_content": "USR+%7C+CO+%7C+July25+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+CO+%7C+July25+%7C+Traffic",
+          "utm_content": "USR+%7C+CO+%7C+July25+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | CO | July25 | Traffic",
+          "pv": "118",
+          "uv": "111"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "53",
+          "uv": "46"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "pv": "50",
+          "uv": "49"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245567832780564",
+          "pv": "34",
+          "uv": "34"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+CO+%7C+July25+%7C+Traffic",
+          "pv": "13",
+          "uv": "13"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "4",
+          "uv": "4"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "155",
+          "uv": "142"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "78",
+          "uv": "78"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "31",
+          "uv": "30"
+        },
+        {
+          "referrer_host": "linktr.ee",
+          "pv": "3",
+          "uv": "3"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "2",
+          "uv": "2"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "2",
+          "uv": "1"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "2dc29981-3475-4d2b-ab5d-89d80d81d01e",
+          "first_visit": "2026-05-07T18:23:48.823Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://app.universalspeedrating.com/events/23",
+          "last_visit": "2026-05-07T18:24:50.937Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://app.universalspeedrating.com/events/23",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-05-07T18:46:21.418Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-10T00:47:39.208Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://eventsmanager.facebook.com/",
+          "cta_clicks": "0",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "50708da1-6fbb-4bb1-ba49-2e1c99682789",
+          "first_visit": "2026-05-11T21:04:34.469Z",
+          "first_src": "ig",
+          "first_med": "paid",
+          "first_camp": "120245567832780564",
+          "first_ref": "https://instagram.com/",
+          "last_visit": "2026-05-11T21:04:34.469Z",
+          "last_src": "ig",
+          "last_med": "paid",
+          "last_camp": "120245567832780564",
+          "last_ref": "https://instagram.com/",
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [],
+      "paid_attribution": [],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "128",
+          "pv": "128",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "fb",
+          "uv": "48",
+          "pv": "48",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "46",
+          "pv": "46",
+          "cta_unique": "1",
+          "rs_unique": "2"
+        },
+        {
+          "src": "ig",
+          "uv": "34",
+          "pv": "34",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        }
+      ]
+    },
+    "14": {
+      "event_id": "14",
+      "page_path": "/events/14",
+      "current_name": "USR Showcase: Idaho",
+      "former_names": [
+        "Hansen Athletics Showcase"
+      ],
+      "summary": {
+        "pv": "223",
+        "uv": "199",
+        "first_seen": "2026-04-23T15:53:44.602Z",
+        "last_seen": "2026-05-12T05:20:15.510Z",
+        "cta_clicks": "14",
+        "cta_unique": "9",
+        "rs_count": "16",
+        "rs_unique": "10",
+        "rc_count": "2",
+        "rc_unique": "2",
+        "rc_revenue_cents": "19000",
+        "rc_subtotal_cents": "19000",
+        "rc_discount_cents": "0",
+        "ps_count": "2",
+        "ps_unique": "2",
+        "ps_amount_cents": "19000"
+      },
+      "daily": [
+        {
+          "d": "2026-04-23T00:00:00.000Z",
+          "pv": "3",
+          "uv": "1",
+          "cta": "1",
+          "rs": "1",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-04-30T00:00:00.000Z",
+          "pv": "3",
+          "uv": "3",
+          "cta": "2",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-03T00:00:00.000Z",
+          "pv": "1",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-06T00:00:00.000Z",
+          "pv": "2",
+          "uv": "2",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-07T00:00:00.000Z",
+          "pv": "2",
+          "uv": "1",
+          "cta": "0",
+          "rs": "0",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-08T00:00:00.000Z",
+          "pv": "2",
+          "uv": "2",
+          "cta": "1",
+          "rs": "1",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-10T00:00:00.000Z",
+          "pv": "94",
+          "uv": "89",
+          "cta": "0",
+          "rs": "2",
+          "rc": "0",
+          "ps": "0"
+        },
+        {
+          "d": "2026-05-11T00:00:00.000Z",
+          "pv": "85",
+          "uv": "80",
+          "cta": "2",
+          "rs": "2",
+          "rc": "1",
+          "ps": "1"
+        },
+        {
+          "d": "2026-05-12T00:00:00.000Z",
+          "pv": "31",
+          "uv": "25",
+          "cta": "6",
+          "rs": "6",
+          "rc": "0",
+          "ps": "0"
+        }
+      ],
+      "utm_raw": [
+        {
+          "utm_source": "(none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "utm_content": "(none)",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "67",
+          "uv": "51"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ID | July29 | Traffic",
+          "utm_content": "USR | ID | July29 | Ad4 | RecruitingExposure",
+          "utm_term": "120245657170280564",
+          "utm_id": "120245657170260564",
+          "pv": "31",
+          "uv": "31"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ID | July29 | Traffic",
+          "utm_content": "USR | ID | July29 | Ad1 | OwnTheirFuture",
+          "utm_term": "120245657170290564",
+          "utm_id": "120245657170260564",
+          "pv": "30",
+          "uv": "29"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657170260564",
+          "utm_content": "120245658172120564",
+          "utm_term": "120245657170300564",
+          "utm_id": "120245657170260564",
+          "pv": "26",
+          "uv": "26"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657170260564",
+          "utm_content": "120245658172120564",
+          "utm_term": "120245657170300564",
+          "utm_id": "120245657170260564",
+          "pv": "21",
+          "uv": "20"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ID | July29 | Traffic",
+          "utm_content": "USR | ID | July29 | Ad6 | WhereTheyRank",
+          "utm_term": "120245657170300564",
+          "utm_id": "120245657170260564",
+          "pv": "18",
+          "uv": "17"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "social",
+          "utm_campaign": "(none)",
+          "utm_content": "link_in_bio",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "8",
+          "uv": "4"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657170260564",
+          "utm_content": "120245658130010564",
+          "utm_term": "120245657170290564",
+          "utm_id": "120245657170260564",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ID+%7C+July29+%7C+Traffic",
+          "utm_content": "USR+%7C+ID+%7C+July29+%7C+Ad1+%7C+OwnTheirFuture",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ID+%7C+July29+%7C+Traffic",
+          "utm_content": "USR+%7C+ID+%7C+July29+%7C+Ad6+%7C+WhereTheyRank",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "5",
+          "uv": "5"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ID+%7C+July29+%7C+Traffic",
+          "utm_content": "USR+%7C+ID+%7C+July29+%7C+Ad4+%7C+RecruitingExposure",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "4",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "utm_content": "{{ad.name}}",
+          "utm_term": "(none)",
+          "utm_id": "(none)",
+          "pv": "3",
+          "uv": "3"
+        }
+      ],
+      "utm_top": [
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR | ID | July29 | Traffic",
+          "pv": "79",
+          "uv": "77"
+        },
+        {
+          "utm_source": "(direct/none)",
+          "utm_medium": "(none)",
+          "utm_campaign": "(none)",
+          "pv": "67",
+          "uv": "51"
+        },
+        {
+          "utm_source": "fb",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657170260564",
+          "pv": "26",
+          "uv": "25"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "paid",
+          "utm_campaign": "120245657170260564",
+          "pv": "26",
+          "uv": "26"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "USR+%7C+ID+%7C+July29+%7C+Traffic",
+          "pv": "14",
+          "uv": "14"
+        },
+        {
+          "utm_source": "ig",
+          "utm_medium": "social",
+          "utm_campaign": "(none)",
+          "pv": "8",
+          "uv": "4"
+        },
+        {
+          "utm_source": "Facebook",
+          "utm_medium": "paid",
+          "utm_campaign": "{{campaign.name}}",
+          "pv": "3",
+          "uv": "3"
+        }
+      ],
+      "referrers": [
+        {
+          "referrer_host": "facebook.com",
+          "pv": "121",
+          "uv": "114"
+        },
+        {
+          "referrer_host": "instagram.com",
+          "pv": "50",
+          "uv": "50"
+        },
+        {
+          "referrer_host": "(no referrer)",
+          "pv": "44",
+          "uv": "32"
+        },
+        {
+          "referrer_host": "universalspeedrating.com (internal)",
+          "pv": "3",
+          "uv": "1"
+        },
+        {
+          "referrer_host": "linktr.ee",
+          "pv": "3",
+          "uv": "2"
+        },
+        {
+          "referrer_host": "l.facebook.com (FB redirect)",
+          "pv": "1",
+          "uv": "1"
+        },
+        {
+          "referrer_host": "google.com",
+          "pv": "1",
+          "uv": "1"
+        }
+      ],
+      "midfunnel_anon": [
+        {
+          "anonymous_id": "0410c929-21e1-4af3-991b-9842ca148045",
+          "first_visit": "2026-04-30T02:39:27.261Z",
+          "first_src": "ig",
+          "first_med": "social",
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-11T17:23:30.789Z",
+          "last_src": "ig",
+          "last_med": "social",
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "9097c179-a1d9-406d-97c7-fe0c81f93403",
+          "first_visit": "2026-05-07T14:59:37.683Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-11T20:14:13.253Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "0",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "15bf0bf0-3ddd-4526-a52d-36027fbda1a3",
+          "first_visit": "2026-05-12T00:18:36.124Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": "2026-05-12T03:10:21.706Z",
+          "last_src": "ig",
+          "last_med": "social",
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "3aa300b3-225b-4322-a513-20f84d3cecc3",
+          "first_visit": "2026-05-12T02:58:07.788Z",
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": "https://l.instagram.com/",
+          "last_visit": "2026-05-12T02:58:07.788Z",
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": "https://l.instagram.com/",
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "384c93db-2a04-45ae-9fe0-4edd02f7bf58",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "bf5f951e-2eb8-4d66-adcd-193b986ffa2e",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "2",
+          "rs_count": "2"
+        },
+        {
+          "anonymous_id": "72a3d071-036e-4701-b229-849a2a865542",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "9d3d6009-ef46-47d0-bcaf-4058f4767d4a",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        },
+        {
+          "anonymous_id": "d3b5ed61-0ffb-4961-a478-e1db139d6842",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "3",
+          "rs_count": "3"
+        },
+        {
+          "anonymous_id": "68380386-b7d2-404e-a863-8e8987f6ecd0",
+          "first_visit": null,
+          "first_src": null,
+          "first_med": null,
+          "first_camp": null,
+          "first_ref": null,
+          "last_visit": null,
+          "last_src": null,
+          "last_med": null,
+          "last_camp": null,
+          "last_ref": null,
+          "cta_clicks": "1",
+          "rs_count": "1"
+        }
+      ],
+      "paid_regs": [
+        {
+          "registration_id": "14",
+          "user_id": "athlete:135062",
+          "reg_at": "2026-05-08T20:09:15.017Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "USR Showcase: Idaho"
+        },
+        {
+          "registration_id": "18",
+          "user_id": "athlete:135440",
+          "reg_at": "2026-05-11T17:31:36.566Z",
+          "amount_charged": "9500",
+          "subtotal": "9500",
+          "discount_amount": "0",
+          "coupon_code": null,
+          "event_name": "USR Showcase: Idaho"
+        }
+      ],
+      "paid_attribution": [
+        {
+          "registration_id": "18",
+          "user_id": "athlete:135440",
+          "reg_at": "2026-05-11T17:31:36.566Z",
+          "anonymous_id": "0410c929-21e1-4af3-991b-9842ca148045",
+          "bridge_evt": "reg_started",
+          "gap_sec": 418.694,
+          "visit_count": "2",
+          "first_visit": "2026-04-30T02:39:27.261Z",
+          "first_src": "ig",
+          "first_med": "social",
+          "first_camp": "(none)",
+          "first_ref": null,
+          "last_visit": "2026-05-11T17:23:30.789Z",
+          "last_src": "ig",
+          "last_med": "social",
+          "last_camp": "(none)",
+          "last_ref": null
+        }
+      ],
+      "paid_unattributed": [],
+      "funnel_by_source": [
+        {
+          "src": "Facebook",
+          "uv": "94",
+          "pv": "94",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        },
+        {
+          "src": "(direct/none)",
+          "uv": "51",
+          "pv": "51",
+          "cta_unique": "2",
+          "rs_unique": "3"
+        },
+        {
+          "src": "ig",
+          "uv": "29",
+          "pv": "29",
+          "cta_unique": "1",
+          "rs_unique": "1"
+        },
+        {
+          "src": "fb",
+          "uv": "25",
+          "pv": "25",
+          "cta_unique": "0",
+          "rs_unique": "0"
+        }
+      ]
+    }
+  }
+};
+
+// ---- Helpers ----
+const n = (v) => typeof v === 'string' ? parseInt(v, 10) || 0 : (v || 0);
+const fmt = (v) => n(v).toLocaleString();
+const dollars = (cents) => '$' + (n(cents) / 100).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+const dollarsNoCents = (cents) => '$' + Math.round(n(cents) / 100).toLocaleString();
+const pct = (a, b) => b > 0 ? ((a / b) * 100).toFixed(1) + '%' : '—';
+const pctNum = (a, b) => b > 0 ? (a / b * 100) : 0;
+
+function cleanCampaign(c) {
+  if (!c || c === '(none)') return { clean: '(none)', kind: 'none' };
+  if (c === '{{campaign.name}}') return { clean: '(broken template token)', kind: 'broken' };
+  let d = c;
+  try { d = decodeURIComponent(c.replace(/\+/g, ' ')); } catch(e) {}
+  if (/^\d{10,}$/.test(d)) return { clean: 'Meta ad set ID (' + d + ')', kind: 'numeric' };
+  return { clean: d, kind: 'normal' };
+}
+function cleanSource(s) {
+  if (!s || s === '(none)' || s === '(direct/none)') return { clean: 'Direct / none', kind: 'direct' };
+  const lower = s.toLowerCase();
+  if (lower === 'facebook' || lower === 'fb') return { clean: 'Facebook', kind: 'fb' };
+  if (lower === 'instagram' || lower === 'ig') return { clean: 'Instagram', kind: 'ig' };
+  if (lower === 'th' || lower === 'threads') return { clean: 'Threads', kind: 'th' };
+  return { clean: s, kind: 'other' };
+}
+function sourcePillClass(kind) {
+  return 'pill ' + (kind === 'direct' ? 'direct' : kind === 'fb' ? 'fb' : kind === 'ig' ? 'ig' : kind === 'th' ? 'th' : 'none');
+}
+function shortDate(d) { return new Date(d).toLocaleDateString(undefined, {month:'short', day:'numeric'}); }
+function shortDateTime(d) { return new Date(d).toLocaleString(undefined, {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}); }
+
+// ---- Snapshot header ----
+const gen = new Date(DATA.generated_at);
+document.getElementById('snap').innerHTML =
+  'Snapshot: <b>' + gen.toLocaleString(undefined, {dateStyle:'medium', timeStyle:'short'}) + '</b><br>' +
+  'Source: Redshift <code>segment.*_prod</code><br>' +
+  '<span class="refresh">Ask Claude to refresh</span>';
+
+// ---- All-events overview ----
+const overviewTbody = document.querySelector('#overview-table tbody');
+const eventIds = DATA.event_ids;
+let totals = { pv:0, uv:0, cta:0, rs:0, rc:0, rev:0 };
+
+eventIds.forEach(eid => {
+  const ev = DATA.events[eid];
+  const s = ev.summary;
+  const pv = n(s.pv), uv = n(s.uv), cta = n(s.cta_clicks), rs = n(s.rs_count), rc = n(s.rc_count), rev = n(s.rc_revenue_cents);
+  totals.pv += pv; totals.uv += uv; totals.cta += cta; totals.rs += rs; totals.rc += rc; totals.rev += rev;
+  const conv = pctNum(rc, uv);
+  const convBarW = Math.min(100, conv * 50); // scale: 2% = 100% bar
+  const formerHtml = ev.former_names && ev.former_names.length > 0
+    ? '<div class="event-former">Formerly: ' + ev.former_names.join(', ') + '</div>' : '';
+  overviewTbody.insertAdjacentHTML('beforeend',
+    '<tr style="cursor:pointer" data-eid="' + eid + '" class="overview-row">' +
+      '<td class="event-cell"><div class="event-name">' + ev.current_name + '</div>' + formerHtml + '</td>' +
+      '<td class="mono">/events/' + eid + '</td>' +
+      '<td class="num">' + fmt(pv) + '</td>' +
+      '<td class="num">' + fmt(uv) + '</td>' +
+      '<td class="num">' + fmt(cta) + '</td>' +
+      '<td class="num">' + fmt(rs) + '</td>' +
+      '<td class="num"><b style="color:' + (rc > 0 ? 'var(--carmine)' : 'var(--ink-3)') + '">' + fmt(rc) + '</b></td>' +
+      '<td class="num">' + (rev > 0 ? dollarsNoCents(rev) : '—') + '</td>' +
+      '<td>' + (rc > 0 ? conv.toFixed(2) + '%' + '<span class="conv-bar"><span class="fill" style="width:' + convBarW + '%"></span></span>' : '<span style="color:var(--ink-3)">—</span>') + '</td>' +
+    '</tr>');
+});
+
+document.getElementById('overview-totals').innerHTML =
+  '<td>Total — all Showcases</td><td>—</td>' +
+  '<td class="num">' + fmt(totals.pv) + '</td>' +
+  '<td class="num">' + fmt(totals.uv) + '</td>' +
+  '<td class="num">' + fmt(totals.cta) + '</td>' +
+  '<td class="num">' + fmt(totals.rs) + '</td>' +
+  '<td class="num">' + fmt(totals.rc) + '</td>' +
+  '<td class="num">' + dollarsNoCents(totals.rev) + '</td>' +
+  '<td>' + pctNum(totals.rc, totals.uv).toFixed(2) + '%</td>';
+
+// Wire up overview row clicks
+document.querySelectorAll('.overview-row').forEach(tr => {
+  tr.addEventListener('click', () => { selectEvent(tr.getAttribute('data-eid')); document.getElementById('detail-header').scrollIntoView({behavior:'smooth', block:'start'}); });
+});
+
+// ---- Overview charts ----
+const overviewLabels = eventIds.map(eid => DATA.events[eid].current_name.replace(/^USR Showcase: /, ''));
+const overviewPVs = eventIds.map(eid => n(DATA.events[eid].summary.pv));
+const overviewRev = eventIds.map(eid => n(DATA.events[eid].summary.rc_revenue_cents) / 100);
+const overviewColors = eventIds.map(eid => n(DATA.events[eid].summary.rc_count) > 0 ? '#EC3642' : '#CCCCCC');
+
+new Chart(document.getElementById('overview-pv'), {
+  type:'bar',
+  data:{ labels: overviewLabels, datasets:[{ label:'Page views', data: overviewPVs, backgroundColor:'#0A0A0A' }]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{color:'#EEE'}, ticks:{font:{size:11}}}, y:{ticks:{font:{size:12}}, grid:{display:false}}}}
+});
+new Chart(document.getElementById('overview-rev'), {
+  type:'bar',
+  data:{ labels: overviewLabels, datasets:[{ label:'Revenue ($)', data: overviewRev, backgroundColor: overviewColors }]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:(ctx)=>'$'+ctx.raw.toLocaleString()}}}, scales:{ x:{grid:{color:'#EEE'}, ticks:{font:{size:11}, callback:(v)=>'$'+v}}, y:{ticks:{font:{size:12}}, grid:{display:false}}}}
+});
+
+// ---- Event tabs ----
+const tabsEl = document.getElementById('event-tabs');
+eventIds.forEach(eid => {
+  const ev = DATA.events[eid];
+  const regs = n(ev.summary.rc_count);
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'event-tab';
+  btn.setAttribute('data-eid', eid);
+  btn.innerHTML =
+    '<span class="tab-path">/events/' + eid + '</span>' +
+    '<span class="tab-title">' + ev.current_name.replace(/^USR Showcase: /, '') + (regs > 0 ? '<span class="tab-regs">' + regs + '</span>' : '') + '</span>';
+  btn.addEventListener('click', () => selectEvent(eid));
+  tabsEl.appendChild(btn);
+});
+
+// ---- Per-event rendering ----
+let charts = {}; // Chart.js instances by canvas id
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => { try { c.destroy(); } catch(e){} });
+  charts = {};
+}
+
+function selectEvent(eid) {
+  const ev = DATA.events[eid];
+  if (!ev) return;
+  document.querySelectorAll('.event-tab').forEach(t => t.classList.toggle('active', t.getAttribute('data-eid') === eid));
+
+  // Subhead
+  const subhead = document.getElementById('event-subhead');
+  const formerHtml = ev.former_names && ev.former_names.length > 0
+    ? '<div class="former-name">Originally named: ' + ev.former_names.join(', ') + ' (renamed mid-stream)</div>' : '';
+  subhead.innerHTML =
+    '<div><h3>' + ev.current_name + '</h3>' +
+    '<div class="meta"><code>app.universalspeedrating.com/events/' + eid + '</code> · event_id=' + eid +
+    ' · Window: ' + shortDate(ev.summary.first_seen) + ' → ' + shortDate(ev.summary.last_seen) + '</div>' +
+    formerHtml + '</div>' +
+    '<div class="meta">Snapshot generated ' + gen.toLocaleString(undefined, {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}) + '</div>';
+
+  renderStats(ev);
+  renderFunnel(ev);
+  renderInsight(ev);
+  destroyCharts();
+  renderDaily(ev);
+  renderSourceBars(ev);
+  renderFunnelBars(ev);
+  renderUtmTable(ev);
+  renderRefTable(ev);
+  renderAnonTable(ev);
+  renderRegBySource(ev);
+  renderPaidTable(ev);
+  renderUnattributedTable(ev);
+}
+
+function renderStats(ev) {
+  const S = ev.summary;
+  const stats = [
+    { lbl:'Page views',          val: fmt(S.pv) },
+    { lbl:'Unique visitors',     val: fmt(S.uv) },
+    { lbl:'CTA clicks',          val: fmt(S.cta_clicks),  delta: fmt(S.cta_unique) + ' unique' },
+    { lbl:'Registrations started', val: fmt(S.rs_count), delta: fmt(S.rs_unique) + ' unique' },
+    { lbl:'Paid registrations',  val: fmt(S.rc_count), delta: fmt(S.rc_unique) + ' unique', cls:'accent' },
+    { lbl:'Revenue',             val: dollars(S.rc_revenue_cents), cls:'green' },
+  ];
+  document.getElementById('stats').innerHTML = stats.map(s =>
+    '<div class="stat ' + (s.cls||'') + '"><div class="lbl">' + s.lbl + '</div><div class="val">' + s.val + '</div>' +
+    (s.delta ? '<div class="delta">' + s.delta + '</div>' : '') + '</div>').join('');
+}
+
+function renderFunnel(ev) {
+  const S = ev.summary;
+  const uv = n(S.uv), cta = n(S.cta_unique), rs = n(S.rs_unique), rc = n(S.rc_unique);
+  const steps = [
+    { lbl:'Unique visitors',    v: uv, pct: '100%' },
+    { lbl:'CTA clicks',         v: cta, pct: pct(cta, uv) + ' of UV' },
+    { lbl:'Registration starts',v: rs,  pct: pct(rs, cta) + ' of CTAs' },
+    { lbl:'Paid registrations', v: rc,  pct: pct(rc, rs) + ' of starts · <b>' + pct(rc, uv) + ' end-to-end</b>', cls: 'last' },
+  ];
+  document.getElementById('funnel').innerHTML = steps.map(s =>
+    '<div class="step ' + (s.cls||'') + '"><div class="lbl">' + s.lbl + '</div><div class="v">' + s.v + '</div><div class="pct">' + s.pct + '</div></div>').join('');
+}
+
+function renderInsight(ev) {
+  const fbs = ev.funnel_by_source || [];
+  const paidVisitors = fbs.filter(r => ['Facebook','fb','ig','th'].includes(r.src)).reduce((sum, r) => sum + n(r.uv), 0);
+  const paidCTA = fbs.filter(r => ['Facebook','fb','ig','th'].includes(r.src)).reduce((sum, r) => sum + n(r.cta_unique), 0);
+  const paidRS = fbs.filter(r => ['Facebook','fb','ig','th'].includes(r.src)).reduce((sum, r) => sum + n(r.rs_unique), 0);
+  const directRow = fbs.find(r => r.src === '(direct/none)');
+  const directUV = directRow ? n(directRow.uv) : 0;
+  const directCTA = directRow ? n(directRow.cta_unique) : 0;
+  const directRS = directRow ? n(directRow.rs_unique) : 0;
+  const adLastTouchRegs = (ev.paid_attribution || []).filter(r => r.last_src && r.last_src !== '(direct/none)' && r.last_src !== '(none)').length;
+  const bridgedRegs = (ev.paid_attribution || []).length;
+  const unattributedRegs = (ev.paid_unattributed || []).length;
+  const totalRegs = n(ev.summary.rc_count);
+
+  let html =
+    'Paid Meta traffic drove <strong>' + paidVisitors + ' unique visitors</strong> → <strong>' + paidCTA + ' CTA clicks</strong>, <strong>' + paidRS + ' reg starts</strong>. ' +
+    'Direct / branded search drove <strong>' + directUV + ' unique visitors</strong> → <strong>' + directCTA + ' CTA clicks</strong> and <strong>' + directRS + ' reg starts</strong>.';
+  if (totalRegs > 0) {
+    html += '<br><br>Of ' + totalRegs + ' paid registration' + (totalRegs === 1 ? '' : 's') + ': <strong>' + bridgedRegs + '</strong> bridge through anonymous_id; <strong>' + unattributedRegs + '</strong> don\'t.';
+    if (adLastTouchRegs > 0) {
+      html += ' <strong>' + adLastTouchRegs + '</strong> had a paid-ad source as last-touch attribution — paid retargeting <em>is</em> contributing.';
+    } else if (bridgedRegs > 0) {
+      html += ' Every bridged registration has direct/none as both first and last touch — no paid-ad last-touch contribution this Showcase.';
+    }
+  } else {
+    html += '<br><br><strong>No paid registrations yet for this Showcase.</strong> Either the funnel is still warming up, or landing-page → CTA conversion needs an A/B test.';
+  }
+  document.getElementById('insight-text').innerHTML = html;
+}
+
+function renderDaily(ev) {
+  const days = ev.daily.map(d => shortDate(d.d));
+  charts.daily = new Chart(document.getElementById('daily'), {
+    type: 'line',
+    data: {
+      labels: days,
+      datasets: [
+        { label:'Page views', data: ev.daily.map(d => n(d.pv)), borderColor:'#0A0A0A', backgroundColor:'rgba(10,10,10,0.06)', tension:0.25, fill:true, pointRadius:3, pointBackgroundColor:'#0A0A0A', yAxisID:'y' },
+        { label:'CTA clicks', data: ev.daily.map(d => n(d.cta)), borderColor:'#1B4F8F', tension:0.25, pointRadius:3, pointBackgroundColor:'#1B4F8F', yAxisID:'y1' },
+        { label:'Reg started', data: ev.daily.map(d => n(d.rs)), borderColor:'#B45309', tension:0.25, pointRadius:3, pointBackgroundColor:'#B45309', yAxisID:'y1' },
+        { label:'Paid registrations', data: ev.daily.map(d => n(d.rc)), borderColor:'#EC3642', tension:0.25, pointRadius:4, pointBackgroundColor:'#EC3642', borderWidth:2.5, yAxisID:'y1' },
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+      plugins:{ legend:{position:'bottom', labels:{boxWidth:10, boxHeight:10, padding:14, font:{size:12}}} },
+      scales:{
+        y:{ position:'left', title:{display:true, text:'Page views', font:{size:11}}, grid:{color:'#EEE'}, ticks:{font:{size:11}} },
+        y1:{ position:'right', title:{display:true, text:'Funnel events', font:{size:11}}, grid:{display:false}, ticks:{font:{size:11}, stepSize:1}, beginAtZero:true }
+      }
+    }
+  });
+}
+
+function renderSourceBars(ev) {
+  const srcRows = ev.utm_top.map(r => { const cs = cleanSource(r.utm_source); return { label: cs.clean, pv: n(r.pv), uv: n(r.uv), kind: cs.kind }; });
+  const srcAgg = {};
+  srcRows.forEach(r => { if (!srcAgg[r.label]) srcAgg[r.label] = { pv:0, uv:0, kind:r.kind }; srcAgg[r.label].pv += r.pv; srcAgg[r.label].uv += r.uv; });
+  const labels = Object.keys(srcAgg).sort((a,b) => srcAgg[b].pv - srcAgg[a].pv);
+  const colors = labels.map(l => { const k = srcAgg[l].kind; return k === 'fb' ? '#1B4F8F' : k === 'ig' ? '#A6306C' : k === 'direct' ? '#0A8C3E' : k === 'th' ? '#777' : '#444'; });
+  charts.sourceBars = new Chart(document.getElementById('source-bars'), {
+    type:'bar', data:{ labels, datasets:[{ label:'Page views', data: labels.map(l => srcAgg[l].pv), backgroundColor: colors }]},
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{color:'#EEE'}, ticks:{font:{size:11}}}, y:{ticks:{font:{size:12}}, grid:{display:false}}}}
+  });
+}
+
+function renderFunnelBars(ev) {
+  const fbs = ev.funnel_by_source || [];
+  const labels = fbs.map(r => cleanSource(r.src).clean);
+  charts.funnelBars = new Chart(document.getElementById('funnel-bars'), {
+    type:'bar',
+    data:{ labels, datasets:[
+      { label:'Unique visitors', data: fbs.map(r => n(r.uv)), backgroundColor:'#CDCDCD' },
+      { label:'CTA clickers',    data: fbs.map(r => n(r.cta_unique)), backgroundColor:'#1B4F8F' },
+      { label:'Reg starters',    data: fbs.map(r => n(r.rs_unique)), backgroundColor:'#EC3642' },
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:10, boxHeight:10, padding:12, font:{size:11}}}}, scales:{ y:{type:'logarithmic', grid:{color:'#EEE'}, ticks:{font:{size:11}, callback:(v)=>v}}, x:{ticks:{font:{size:11}}, grid:{display:false}}}}
+  });
+}
+
+function renderUtmTable(ev) {
+  const tbody = document.querySelector('#utm-table tbody');
+  tbody.innerHTML = '';
+  if (!ev.utm_raw || ev.utm_raw.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--ink-3);padding:14px">No UTM data.</td></tr>'; return; }
+  ev.utm_raw.forEach(r => {
+    const cs = cleanSource(r.utm_source);
+    const cm = r.utm_medium === '(none)' || !r.utm_medium ? { cls:'medium-none', label:'—' }
+             : r.utm_medium === 'paid' ? { cls:'medium-paid', label:'paid' }
+             : { cls:'medium-organic', label: r.utm_medium };
+    const cc = cleanCampaign(r.utm_campaign);
+    const campPill = cc.kind === 'broken' ? '<span class="pill broken">' + cc.clean + '</span>'
+                   : cc.kind === 'numeric' ? '<span class="pill medium-paid">' + cc.clean + '</span>'
+                   : cc.kind === 'none' ? '<span class="pill none">—</span>'
+                   : cc.clean;
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr>' +
+        '<td><span class="' + sourcePillClass(cs.kind) + '">' + cs.clean + '</span><div style="font-size:11px;color:#999;font-family:monospace;margin-top:3px">' + r.utm_source + '</div></td>' +
+        '<td><span class="pill ' + cm.cls + '">' + cm.label + '</span></td>' +
+        '<td class="mono">' + r.utm_campaign + '</td>' +
+        '<td>' + campPill + '</td>' +
+        '<td class="num">' + fmt(r.pv) + '</td>' +
+        '<td class="num">' + fmt(r.uv) + '</td>' +
+      '</tr>');
+  });
+}
+
+function renderRefTable(ev) {
+  const tbody = document.querySelector('#ref-table tbody');
+  tbody.innerHTML = '';
+  if (!ev.referrers || ev.referrers.length === 0) { tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-3);padding:14px">No referrer data.</td></tr>'; return; }
+  ev.referrers.forEach(r => {
+    tbody.insertAdjacentHTML('beforeend', '<tr><td>' + r.referrer_host + '</td><td class="num">' + fmt(r.pv) + '</td><td class="num">' + fmt(r.uv) + '</td></tr>');
+  });
+}
+
+function renderAnonTable(ev) {
+  const tbody = document.querySelector('#anon-table tbody');
+  tbody.innerHTML = '';
+  if (!ev.midfunnel_anon || ev.midfunnel_anon.length === 0) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-3);padding:14px">No mid-funnel activity (no CTA clicks or reg starts yet).</td></tr>'; return; }
+  ev.midfunnel_anon.forEach(r => {
+    const fs = cleanSource(r.first_src); const ls = cleanSource(r.last_src);
+    let refDisplay = '—';
+    if (r.first_ref) { try { refDisplay = new URL(r.first_ref).hostname; } catch(e) { refDisplay = r.first_ref.slice(0, 30); } }
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr>' +
+        '<td class="mono">' + r.anonymous_id.slice(0,8) + '…</td>' +
+        '<td>' + shortDateTime(r.first_visit) + '</td>' +
+        '<td><span class="' + sourcePillClass(fs.kind) + '">' + fs.clean + '</span></td>' +
+        '<td><span class="' + sourcePillClass(ls.kind) + '">' + ls.clean + '</span></td>' +
+        '<td class="mono">' + refDisplay + '</td>' +
+        '<td class="num">' + fmt(r.cta_clicks) + '</td>' +
+        '<td class="num">' + fmt(r.rs_count) + '</td>' +
+      '</tr>');
+  });
+}
+
+function renderRegBySource(ev) {
+  const tbody = document.querySelector('#reg-by-source-table tbody');
+  tbody.innerHTML = '';
+  const totalPaidRegs = (ev.paid_attribution?.length || 0) + (ev.paid_unattributed?.length || 0);
+  document.getElementById('reg-total-ft').textContent = totalPaidRegs;
+  document.getElementById('reg-total-lt').textContent = totalPaidRegs;
+
+  if (totalPaidRegs === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--ink-3);padding:14px">No paid registrations yet.</td></tr>';
+    return;
+  }
+  const ftCounts = {}, ltCounts = {}, labelKind = {};
+  (ev.paid_attribution || []).forEach(r => {
+    const fs = cleanSource(r.first_src); const ls = cleanSource(r.last_src);
+    ftCounts[fs.clean] = (ftCounts[fs.clean] || 0) + 1;
+    ltCounts[ls.clean] = (ltCounts[ls.clean] || 0) + 1;
+    labelKind[fs.clean] = fs.kind; labelKind[ls.clean] = ls.kind;
+    if (ls.kind !== 'direct' && r.last_camp && r.last_camp !== '(none)') {
+      if (!labelKind[ls.clean + '_camp']) labelKind[ls.clean + '_camp'] = cleanCampaign(r.last_camp).clean;
+    }
+  });
+  const unattCount = ev.paid_unattributed?.length || 0;
+  if (unattCount > 0) { ftCounts['Unattributed'] = unattCount; ltCounts['Unattributed'] = unattCount; labelKind['Unattributed'] = 'none'; }
+  const labels = [...new Set([...Object.keys(ftCounts), ...Object.keys(ltCounts)])].sort((a, b) => {
+    if (a === 'Unattributed') return 1; if (b === 'Unattributed') return -1;
+    return Math.max(ltCounts[b]||0, ftCounts[b]||0) - Math.max(ltCounts[a]||0, ftCounts[a]||0);
+  });
+  labels.forEach(label => {
+    const ftN = ftCounts[label] || 0;
+    const ltN = ltCounts[label] || 0;
+    const ftPct = ftN / totalPaidRegs * 100;
+    const ltPct = ltN / totalPaidRegs * 100;
+    const kind = labelKind[label] || 'none';
+    const pillCls = label === 'Unattributed' ? 'pill none' : sourcePillClass(kind);
+    const camp = labelKind[label + '_camp'];
+    const labelDisplay = '<span class="' + pillCls + '">' + label + '</span>' +
+      (camp ? '<div style="font-size:11px;color:var(--ink-3);margin-top:3px">via campaign: <code style="font-size:10px">' + camp + '</code></div>' : '');
+    const barColor = label === 'Unattributed' ? '#CCC' : kind === 'direct' ? '#0A8C3E' : kind === 'fb' ? '#1B4F8F' : kind === 'ig' ? '#A6306C' : kind === 'th' ? '#777' : '#444';
+    const bar = (p) => '<div style="display:flex;align-items:center;gap:8px;min-width:140px"><div style="flex:1;height:6px;background:#F0F0F0;border-radius:3px;overflow:hidden"><div style="width:' + p.toFixed(1) + '%;height:100%;background:' + barColor + '"></div></div><span style="font-variant-numeric:tabular-nums;font-size:12px;color:var(--ink-2);min-width:42px;text-align:right">' + p.toFixed(1) + '%</span></div>';
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr>' +
+        '<td>' + labelDisplay + '</td>' +
+        '<td class="num"><b>' + ftN + '</b><span style="color:var(--ink-3);font-weight:400"> / ' + totalPaidRegs + '</span></td>' +
+        '<td class="num"><b>' + ltN + '</b><span style="color:var(--ink-3);font-weight:400"> / ' + totalPaidRegs + '</span></td>' +
+        '<td>' + bar(ftPct) + '</td>' +
+        '<td>' + bar(ltPct) + '</td>' +
+      '</tr>');
+  });
+}
+
+function renderPaidTable(ev) {
+  const tbody = document.querySelector('#paid-table tbody');
+  tbody.innerHTML = '';
+  if (!ev.paid_attribution || ev.paid_attribution.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;color:var(--ink-3);padding:14px">No attributed paid registrations.</td></tr>';
+    return;
+  }
+  ev.paid_attribution.forEach(r => {
+    const fs = cleanSource(r.first_src); const ls = cleanSource(r.last_src);
+    const reg = (ev.paid_regs || []).find(p => p.registration_id === r.registration_id);
+    const amt = reg ? dollars(reg.amount_charged) : '—';
+    const disc = reg && n(reg.discount_amount) > 0 ? '−' + dollars(reg.discount_amount) : '—';
+    const regName = reg ? reg.event_name : '—';
+    const gap = Math.round(n(r.gap_sec));
+    const lastTouchHtml = ls.kind === 'direct'
+      ? '<span class="' + sourcePillClass(ls.kind) + '">' + ls.clean + '</span>'
+      : '<span class="' + sourcePillClass(ls.kind) + '">' + ls.clean + '</span>' +
+        (r.last_camp && r.last_camp !== '(none)' ? '<div style="font-size:10px;color:#999;margin-top:2px">' + cleanCampaign(r.last_camp).clean + '</div>' : '');
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr>' +
+        '<td class="mono">#' + r.registration_id + '</td>' +
+        '<td class="mono">' + r.user_id + '</td>' +
+        '<td style="font-size:11px;color:var(--ink-3)">' + regName + '</td>' +
+        '<td>' + shortDateTime(r.reg_at) + '</td>' +
+        '<td class="num">' + amt + '</td>' +
+        '<td class="num" style="color:var(--ink-3)">' + disc + '</td>' +
+        '<td><span class="pill ' + (r.bridge_evt === 'cta_click' ? 'bridge-cta' : 'bridge-rs') + '">' + (r.bridge_evt === 'cta_click' ? 'CTA click' : 'Reg started') + '</span></td>' +
+        '<td class="num">' + gap + 's</td>' +
+        '<td><span class="' + sourcePillClass(fs.kind) + '">' + fs.clean + '</span></td>' +
+        '<td>' + lastTouchHtml + '</td>' +
+        '<td class="num">' + fmt(r.visit_count) + '</td>' +
+      '</tr>');
+  });
+}
+
+function renderUnattributedTable(ev) {
+  const tbody = document.querySelector('#unattributed-table tbody');
+  tbody.innerHTML = '';
+  if (!ev.paid_unattributed || ev.paid_unattributed.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-3);padding:14px">' + (n(ev.summary.rc_count) > 0 ? 'All paid registrations attributed.' : 'No paid registrations yet.') + '</td></tr>';
+    return;
+  }
+  ev.paid_unattributed.forEach(r => {
+    const reg = (ev.paid_regs || []).find(p => p.registration_id === r.registration_id);
+    const amt = reg ? dollars(reg.amount_charged) : '—';
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr><td class="mono">#' + r.registration_id + '</td><td class="mono">' + r.user_id + '</td><td>' + shortDateTime(r.reg_at) + ' · ' + amt + '</td></tr>');
+  });
+}
+
+// Default to first event (event_id=7, New Mexico — highest revenue)
+selectEvent(eventIds[0]);
+</script>
