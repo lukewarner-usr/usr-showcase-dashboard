@@ -1,10 +1,3 @@
-<script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Usr Showcase Landing Pages Report",
-  "schemaVersion": 1,
-  "description": "Unified multi-event report for all 7 USR Showcase landing pages (events 7, 8, 9, 10, 11, 13, 14). Top: side-by-side overview comparing PV, UV, CTA, reg starts, paid regs, revenue, and end-to-end conversion across all 7. Below: event tabs that swap a full detailed view per Showcase — daily timeline, UTM breakdowns (raw + cleaned), funnel by source, mid-funnel attribution, paid-registration source rollup (first-touch + last-touch), row-level paid regs, unattributed regs. Every event was renamed mid-stream from a partner Speed Lab name to \"USR Showcase: [State]\"; scope is event_id throughout to capture both eras. Snapshot from Redshift segment.*_prod tables."
-}
-</script>
 <meta charset="utf-8">
 <title>USR Showcase Landing Pages — Multi-Event Report</title>
 <style>
@@ -67,6 +60,40 @@ table.data tfoot td { background:var(--surface); font-weight:500; border-top:2px
 .pill.medium-none { background:#EFEFEF; color:#666; }
 .pill.bridge-cta { background:#E7F0FB; color:#1B4F8F; }
 .pill.bridge-rs { background:#E8F5EC; color:var(--green); }
+/* Benchmark panel */
+.bench-card { background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:0; overflow:hidden; }
+table.bench { width:100%; border-collapse:collapse; font-size:13px; }
+table.bench th { text-align:left; font-weight:500; color:var(--ink-3); padding:10px 14px; border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+table.bench td { padding:13px 14px; border-bottom:1px solid var(--line); vertical-align:middle; }
+table.bench tr:last-child td { border-bottom:none; }
+table.bench .metric { font-weight:500; color:var(--black); }
+table.bench .your-rate { font-size:17px; font-weight:500; font-variant-numeric:tabular-nums; min-width:60px; }
+table.bench .your-rate.green { color:var(--green); }
+table.bench .your-rate.yellow { color:var(--amber); }
+table.bench .your-rate.red { color:var(--carmine); }
+table.bench .your-rate.na { color:var(--ink-3); font-style:italic; font-size:13px; font-weight:400; }
+.status-pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:500; letter-spacing:0.02em; white-space:nowrap; }
+.status-pill.green { background:#E8F5EC; color:var(--green); }
+.status-pill.yellow { background:#FFF1D6; color:var(--amber); }
+.status-pill.red { background:#FDE4E5; color:var(--carmine); }
+.status-pill.na { background:#F2F2F2; color:#666; }
+.range-bar { position:relative; height:8px; background:#F0F0F0; border-radius:4px; margin-top:6px; min-width:160px; }
+.range-bar .seg { position:absolute; height:100%; }
+.range-bar .seg.red { background:#FDE4E5; left:0; border-radius:4px 0 0 4px; }
+.range-bar .seg.yellow { background:#FFF1D6; }
+.range-bar .seg.green { background:#E8F5EC; border-radius:0 4px 4px 0; }
+.range-bar .pointer { position:absolute; top:-3px; width:2px; height:14px; background:var(--black); }
+.range-labels { display:flex; justify-content:space-between; font-size:10px; color:var(--ink-3); margin-top:3px; font-variant-numeric:tabular-nums; }
+.bench-source { font-size:11px; color:var(--ink-3); padding:10px 14px; background:var(--surface); border-top:1px solid var(--line); line-height:1.5; }
+.overview .conv-cell { display:flex; align-items:center; gap:8px; }
+.overview .conv-cell.green { color:var(--green); }
+.overview .conv-cell.yellow { color:var(--amber); }
+.overview .conv-cell.red { color:var(--carmine); }
+.overview .conv-cell .dot { display:inline-block; width:8px; height:8px; border-radius:50%; }
+.overview .conv-cell.green .dot { background:var(--green); }
+.overview .conv-cell.yellow .dot { background:var(--amber); }
+.overview .conv-cell.red .dot { background:var(--carmine); }
+
 footer.method { margin-top:36px; padding:16px 18px; background:var(--surface); border-radius:10px; font-size:12px; color:var(--ink-2); line-height:1.7; }
 footer.method b { color:var(--black); font-weight:500; }
 footer.method code { background:#fff; border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:11px; }
@@ -125,7 +152,7 @@ table.overview .conv-bar .fill { display:block; height:100%; background:var(--ca
 <p class="lede">Side-by-side comparison of all 7 landing pages, current event_id mapping, totals, and end-to-end conversion rate. Click an event below for the full detail view.</p>
 <div class="card" style="padding:0;overflow:hidden;"><table class="data overview" id="overview-table">
   <thead><tr>
-    <th>Event</th><th>Path</th><th class="num">Page views</th><th class="num">Unique</th><th class="num">CTA clicks</th><th class="num">Reg started</th><th class="num">Paid regs</th><th class="num">Revenue</th><th>End-to-end conv.</th>
+    <th>Event</th><th>Path</th><th class="num">Page views</th><th class="num">Unique</th><th class="num">CTA clicks</th><th class="num">Reg started</th><th class="num">Paid regs</th><th class="num">Revenue</th><th>PV → Paid <span style="font-weight:400;font-size:10px;color:var(--ink-3)">(vs. benchmark)</span></th>
   </tr></thead>
   <tbody></tbody>
   <tfoot><tr class="totals" id="overview-totals"></tr></tfoot>
@@ -154,7 +181,18 @@ table.overview .conv-bar .fill { display:block; height:100%; background:var(--ca
 <h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Funnel</h3>
 <div class="funnel" id="funnel"></div>
 
-<div class="insight"><h3>The signal for this Showcase</h3><p id="insight-text"></p></div>
+<h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Funnel vs. industry benchmarks <span style="font-size:12px;color:var(--ink-3);font-weight:400;margin-left:8px">B2C paid event registration · cold + retargeted Meta traffic</span></h3>
+<div class="bench-card">
+  <table class="bench" id="bench-table">
+    <thead><tr><th>Metric</th><th>Your rate</th><th>Status</th><th style="width:200px">Where you sit</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="bench-source">
+    Sources: Unbounce Q4 2024 (median landing-page CR 6.6%; events &amp; entertainment 12.3%); WordStream Facebook Ads benchmark (FB ad CR 9.21%, ticket purchase ~1.33%); Monetate (add-to-cart 9.04%); Baymard (cart abandonment ~70%). Ranges are interpolated for paid event registration with mixed warm/cold paid social traffic — pure youth-sports-paid-registration benchmarks aren't publicly tracked.
+  </div>
+</div>
+
+<div class="insight" style="margin-top:24px"><h3>The signal for this Showcase</h3><p id="insight-text"></p></div>
 
 <h3 style="font-size:14px;font-weight:500;margin:24px 0 10px">Daily timeline</h3>
 <div class="card"><div class="chart-wrap tall"><canvas id="daily"></canvas></div></div>
@@ -212,7 +250,7 @@ table.overview .conv-bar .fill { display:block; height:100%; background:var(--ca
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <script>
 const DATA = {
-  "generated_at": "2026-05-12T14:59:55.192Z",
+  "generated_at": "2026-05-12T14:33:43.646Z",
   "event_ids": [
     "7",
     "8",
@@ -4307,6 +4345,7 @@ const DATA = {
     }
   }
 };
+
 // ---- Helpers ----
 const n = (v) => typeof v === 'string' ? parseInt(v, 10) || 0 : (v || 0);
 const fmt = (v) => n(v).toLocaleString();
@@ -4337,6 +4376,39 @@ function sourcePillClass(kind) {
 function shortDate(d) { return new Date(d).toLocaleDateString(undefined, {month:'short', day:'numeric'}); }
 function shortDateTime(d) { return new Date(d).toLocaleString(undefined, {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}); }
 
+// ---- Industry benchmarks ----
+// Synthesized from: Unbounce Q4 2024 (median LP CR 6.6%; events/entertainment 12.3%);
+// WordStream FB Ads benchmark (FB ad CR 9.21%, ticket purchase ~1.33%);
+// Monetate (add-to-cart 9.04%); Baymard (cart abandonment ~70%).
+// Ranges interpolated for B2C paid event registration with mixed warm/cold paid social traffic.
+const BENCHMARKS = [
+  { key:'pv_to_cta',  label:'PV → CTA Click',          red:3,  green:8,  display:[0, 12], note:'Engagement with primary CTA' },
+  { key:'pv_to_rs',   label:'PV → Reg Started',        red:2,  green:5,  display:[0, 10], note:'Reached the registration form (≈ add-to-cart equivalent)' },
+  { key:'pv_to_paid', label:'PV → Paid Reg',           red:1,  green:3,  display:[0, 6],  note:'Visitor → paid registration' },
+  { key:'rs_to_paid', label:'Reg Started → Paid (end-to-end)', red:30, green:50, display:[0, 100], note:'Of those who started reg, what % paid' },
+];
+
+function classifyRate(rate, b) {
+  if (rate >= b.green) return 'green';
+  if (rate >= b.red) return 'yellow';
+  return 'red';
+}
+function statusLabel(cls) {
+  return cls === 'green' ? 'Above benchmark' : cls === 'yellow' ? 'Within range' : 'Below benchmark';
+}
+
+// Compute the 4 benchmark rates for a single event. Returns null per metric if denominator is zero.
+function computeRates(ev) {
+  const S = ev.summary;
+  const pv = n(S.pv), cta = n(S.cta_clicks), rs = n(S.rs_count), rc = n(S.rc_count);
+  return {
+    pv_to_cta:  pv > 0 ? cta / pv * 100 : null,
+    pv_to_rs:   pv > 0 ? rs  / pv * 100 : null,
+    pv_to_paid: pv > 0 ? rc  / pv * 100 : null,
+    rs_to_paid: rs > 0 ? rc  / rs * 100 : null,
+  };
+}
+
 // ---- Snapshot header ----
 const gen = new Date(DATA.generated_at);
 document.getElementById('snap').innerHTML =
@@ -4354,8 +4426,13 @@ eventIds.forEach(eid => {
   const s = ev.summary;
   const pv = n(s.pv), uv = n(s.uv), cta = n(s.cta_clicks), rs = n(s.rs_count), rc = n(s.rc_count), rev = n(s.rc_revenue_cents);
   totals.pv += pv; totals.uv += uv; totals.cta += cta; totals.rs += rs; totals.rc += rc; totals.rev += rev;
-  const conv = pctNum(rc, uv);
-  const convBarW = Math.min(100, conv * 50); // scale: 2% = 100% bar
+  // End-to-end conv (PV → Paid Reg) — colored against the same benchmark as the per-event panel
+  const conv = pv > 0 ? rc / pv * 100 : 0;
+  const convBench = BENCHMARKS.find(b => b.key === 'pv_to_paid');
+  const convCls = rc > 0 ? classifyRate(conv, convBench) : null;
+  const convCell = rc > 0
+    ? '<div class="conv-cell ' + convCls + '"><span class="dot"></span>' + conv.toFixed(2) + '%</div>'
+    : '<span style="color:var(--ink-3)">—</span>';
   const formerHtml = ev.former_names && ev.former_names.length > 0
     ? '<div class="event-former">Formerly: ' + ev.former_names.join(', ') + '</div>' : '';
   overviewTbody.insertAdjacentHTML('beforeend',
@@ -4368,19 +4445,27 @@ eventIds.forEach(eid => {
       '<td class="num">' + fmt(rs) + '</td>' +
       '<td class="num"><b style="color:' + (rc > 0 ? 'var(--carmine)' : 'var(--ink-3)') + '">' + fmt(rc) + '</b></td>' +
       '<td class="num">' + (rev > 0 ? dollarsNoCents(rev) : '—') + '</td>' +
-      '<td>' + (rc > 0 ? conv.toFixed(2) + '%' + '<span class="conv-bar"><span class="fill" style="width:' + convBarW + '%"></span></span>' : '<span style="color:var(--ink-3)">—</span>') + '</td>' +
+      '<td>' + convCell + '</td>' +
     '</tr>');
 });
 
-document.getElementById('overview-totals').innerHTML =
-  '<td>Total — all Showcases</td><td>—</td>' +
-  '<td class="num">' + fmt(totals.pv) + '</td>' +
-  '<td class="num">' + fmt(totals.uv) + '</td>' +
-  '<td class="num">' + fmt(totals.cta) + '</td>' +
-  '<td class="num">' + fmt(totals.rs) + '</td>' +
-  '<td class="num">' + fmt(totals.rc) + '</td>' +
-  '<td class="num">' + dollarsNoCents(totals.rev) + '</td>' +
-  '<td>' + pctNum(totals.rc, totals.uv).toFixed(2) + '%</td>';
+{
+  const totalConv = totals.pv > 0 ? totals.rc / totals.pv * 100 : 0;
+  const totalBench = BENCHMARKS.find(b => b.key === 'pv_to_paid');
+  const totalCls = totals.rc > 0 ? classifyRate(totalConv, totalBench) : null;
+  const totalConvCell = totals.rc > 0
+    ? '<div class="conv-cell ' + totalCls + '"><span class="dot"></span>' + totalConv.toFixed(2) + '%</div>'
+    : '—';
+  document.getElementById('overview-totals').innerHTML =
+    '<td>Total — all Showcases</td><td>—</td>' +
+    '<td class="num">' + fmt(totals.pv) + '</td>' +
+    '<td class="num">' + fmt(totals.uv) + '</td>' +
+    '<td class="num">' + fmt(totals.cta) + '</td>' +
+    '<td class="num">' + fmt(totals.rs) + '</td>' +
+    '<td class="num">' + fmt(totals.rc) + '</td>' +
+    '<td class="num">' + dollarsNoCents(totals.rev) + '</td>' +
+    '<td>' + totalConvCell + '</td>';
+}
 
 // Wire up overview row clicks
 document.querySelectorAll('.overview-row').forEach(tr => {
@@ -4446,6 +4531,7 @@ function selectEvent(eid) {
 
   renderStats(ev);
   renderFunnel(ev);
+  renderBenchmarks(ev);
   renderInsight(ev);
   destroyCharts();
   renderDaily(ev);
@@ -4485,6 +4571,46 @@ function renderFunnel(ev) {
   ];
   document.getElementById('funnel').innerHTML = steps.map(s =>
     '<div class="step ' + (s.cls||'') + '"><div class="lbl">' + s.lbl + '</div><div class="v">' + s.v + '</div><div class="pct">' + s.pct + '</div></div>').join('');
+}
+
+function renderBenchmarks(ev) {
+  const rates = computeRates(ev);
+  const tbody = document.querySelector('#bench-table tbody');
+  tbody.innerHTML = '';
+  BENCHMARKS.forEach(b => {
+    const rate = rates[b.key];
+    let cls, statusHtml, rateHtml, barHtml;
+    if (rate === null) {
+      cls = 'na';
+      rateHtml = '<span class="your-rate na">no data</span>';
+      statusHtml = '<span class="status-pill na">No baseline</span>';
+      barHtml = '';
+    } else {
+      cls = classifyRate(rate, b);
+      rateHtml = '<span class="your-rate ' + cls + '">' + rate.toFixed(2) + '%</span>';
+      statusHtml = '<span class="status-pill ' + cls + '">' + statusLabel(cls) + '</span>';
+      const [lo, hi] = b.display;
+      const range = hi - lo;
+      const redEnd = ((b.red - lo) / range) * 100;
+      const greenStart = ((b.green - lo) / range) * 100;
+      const ptr = Math.max(0, Math.min(100, ((rate - lo) / range) * 100));
+      barHtml =
+        '<div class="range-bar">' +
+          '<div class="seg red"    style="left:0; width:' + redEnd.toFixed(1) + '%"></div>' +
+          '<div class="seg yellow" style="left:' + redEnd.toFixed(1) + '%; width:' + (greenStart - redEnd).toFixed(1) + '%"></div>' +
+          '<div class="seg green"  style="left:' + greenStart.toFixed(1) + '%; width:' + (100 - greenStart).toFixed(1) + '%"></div>' +
+          '<div class="pointer" style="left:calc(' + ptr.toFixed(1) + '% - 1px)"></div>' +
+        '</div>' +
+        '<div class="range-labels"><span>&lt;' + b.red + '% red</span><span>' + b.red + '–' + b.green + '% yellow</span><span>&gt;' + b.green + '% green</span></div>';
+    }
+    tbody.insertAdjacentHTML('beforeend',
+      '<tr>' +
+        '<td><div class="metric">' + b.label + '</div><div style="font-size:11px;color:var(--ink-3);margin-top:2px">' + b.note + '</div></td>' +
+        '<td>' + rateHtml + '</td>' +
+        '<td>' + statusHtml + '</td>' +
+        '<td>' + barHtml + '</td>' +
+      '</tr>');
+  });
 }
 
 function renderInsight(ev) {
